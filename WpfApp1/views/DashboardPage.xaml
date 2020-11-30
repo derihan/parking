@@ -80,7 +80,6 @@
                     Background="#1a459c"
                     Padding="10"
                     Grid.Row="0"
-                    MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
                     >
                     <Path Width="18"
                           VerticalAlignment="Center"
@@ -254,7 +253,7 @@
             </Grid>
             <Grid Grid.Column="1" >
                 <Frame Name="ContentFrame" Grid.Column="1" />
-             
+                <Label Content="ini konten"/>
             </Grid>
 
         </Grid>

@@ -23,18 +23,6 @@ namespace WpfApp1.views
         public DashboardPage()
         {
             InitializeComponent();
-            showHomePage();
-        }
-
-
-        private void showHomePage()
-        {
-            ContentFrame.Navigate(new Uri("/views/HomePage.xaml", UriKind.RelativeOrAbsolute));
-        }
-       
-        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            showHomePage();
         }
     }
 }
