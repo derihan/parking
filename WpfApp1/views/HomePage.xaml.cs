@@ -16,24 +16,13 @@ using System.Windows.Shapes;
 namespace WpfApp1.views
 {
     /// <summary>
-    /// Interaction logic for DashboardPage.xaml
+    /// Interaction logic for HomePage.xaml
     /// </summary>
-    public partial class DashboardPage : Page
+    public partial class HomePage : Page
     {
-        public DashboardPage()
+        public HomePage()
         {
             InitializeComponent();
-            navigatedPage();
-        }
-
-        private void navigatedPage()
-        {
-            ContentFrame.Navigate(new Uri("/views/HomePage.xaml", UriKind.RelativeOrAbsolute));
-        }
-
-        private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            navigatedPage();
         }
     }
 }
