@@ -22,6 +22,16 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="menutitle" TargetType="{x:Type Run}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BaselineAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <Style x:Key="headermenu" TargetType="{x:Type Run}">
+           
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
     </Page.Resources>
     <ScrollViewer>
         <Grid>
@@ -101,7 +111,7 @@
                         Height="50"
                         Grid.Row="0"
                         Padding="10 0 0 0">
-                        <Run Text="MANAGEMENT" Foreground="White" FontSize="12" />
+                        <Run Text="MANAGEMENT" Style="{StaticResource headermenu}" />
                         </TextBlock>
                         <TextBlock 
                         VerticalAlignment="Center"
@@ -114,7 +124,7 @@
                              Foreground="White"
                              />
                         
-                        <Run Text=" space parking" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" space parking" Style="{StaticResource menutitle}" />
                         </TextBlock>
                         <TextBlock 
                         VerticalAlignment="Center"
@@ -127,7 +137,7 @@
                             
                              />
                         
-                        <Run Text=" Income" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Income" Style="{StaticResource menutitle}"/>
                         </TextBlock>
                         <TextBlock 
                         VerticalAlignment="Center"
@@ -140,7 +150,7 @@
                              Foreground="White"
                              />
                         
-                        <Run Text=" Hsitory" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Hsitory" Style="{StaticResource menutitle}" />
                         </TextBlock>
                         <TextBlock 
                         VerticalAlignment="Center"
@@ -153,7 +163,7 @@
                              Foreground="White"
                              />
                         
-                        <Run Text=" Scanning area" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Scanning area" Style="{StaticResource menutitle}" />
                         </TextBlock>
                         <TextBlock 
                         VerticalAlignment="Center"
@@ -166,7 +176,7 @@
                              Foreground="White"
                              />
                         
-                        <Run Text=" Visitors / User" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Visitors / User" Style="{StaticResource menutitle}" />
                         </TextBlock>
                     </Grid>
 
@@ -183,7 +193,7 @@
                         Height="50"
                         Grid.Row="0"
                         Padding="10 0 0 0">
-                        <Run Text="DATA SOURCE" Foreground="White" FontSize="12" />
+                        <Run Text="DATA SOURCE" Style="{StaticResource headermenu}" />
                     </TextBlock>
                     <TextBlock 
                         VerticalAlignment="Center"
@@ -196,7 +206,7 @@
                              Foreground="White"
                              />
                         
-                        <Run Text=" Area" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Area" Style="{StaticResource menutitle}" />
                     </TextBlock>
                     <TextBlock 
                         VerticalAlignment="Center"
@@ -209,7 +219,7 @@
                              Foreground="White"
                              />
                         
-                        <Run Text=" Area Category" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Area Category" Style="{StaticResource menutitle}" />
                     </TextBlock>
                 </Grid>
                 <Grid Grid.Row="4" Margin="6 0 6 0" >
@@ -222,7 +232,7 @@
                         Height="50"
                         Grid.Row="0"
                         Padding="10 0 0 0">
-                        <Run Text="SETTINGS" Foreground="White" FontSize="12" />
+                        <Run Text="SETTINGS" Style="{StaticResource headermenu}" />
                     </TextBlock>
                     <TextBlock 
                         VerticalAlignment="Center"
@@ -230,14 +240,13 @@
                         Padding="10"
                         Style="{StaticResource HoveredText}"
                       >
-                       
-                        
+
                          <iconPacks:PackIconFontAwesome 
                              Kind="MoneyBillAltSolid"
                              Foreground="White"
                              />
                         
-                        <Run Text=" Fees area" Foreground="White" FontSize="12" BaselineAlignment="Center" />
+                        <Run Text=" Fees area" Style="{StaticResource menutitle}" />
                     </TextBlock>
 
                 </Grid>
