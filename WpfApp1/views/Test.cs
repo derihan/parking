@@ -8,5 +8,8 @@ namespace WpfApp1.views
 {
     class Test
     {
+        public Test()
+        {
+        }
     }
 }
