@@ -1,0 +1,67 @@
+﻿<Page x:Class="WpfApp1.views.ScannerMgm"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+      xmlns:local="clr-namespace:WpfApp1.views"
+      xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.BootstrapIcons"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="1000"
+      Title="ScannerMgm">
+
+    <Grid Margin="10" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="0" HorizontalAlignment="Left" Width="780" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="57"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="178" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonDown="GridopenScann_window"  >
+                <Border BorderBrush="Gray" BorderThickness="0.3" Margin="0,0,10.4,10.4"  >
+                    <Grid VerticalAlignment="Center"  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid  Grid.Column="0" Background="#0984e3" Height="36" VerticalAlignment="Top" >
+                            <iconPacks:PackIconBootstrapIcons Kind="UpcScan" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
+                        </Grid>
+                        <Grid  Grid.Column="1" Background="White" Height="36" >
+                            <Label Content="Show scanner window" VerticalAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" >
+                <WindowsFormsHost Width="450" Height="400" HorizontalAlignment="Left"  >
+                    <wf:PictureBox x:Name="pictureBox1" SizeMode="StretchImage" BackColor="WhiteSmoke"  MouseDown="pictureBox1_MouseDown" />
+                </WindowsFormsHost>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1" >
+                <WindowsFormsHost Width="236" Height="74" HorizontalAlignment="Left" VerticalAlignment="Top"  >
+                    <wf:PictureBox x:Name="pictureBox2" SizeMode="AutoSize" BackColor="WhiteSmoke"  MouseDoubleClick="pictclicked" />
+                </WindowsFormsHost>
+                <WindowsFormsHost Width="223" Height="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="257,0,0,0"  >
+                    <wf:PictureBox x:Name="pictureBox3" SizeMode="AutoSize" BackColor="WhiteSmoke"  MouseDoubleClick="pictclicked" />
+                </WindowsFormsHost>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</Page>

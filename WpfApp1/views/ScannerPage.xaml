@@ -1,0 +1,35 @@
+﻿<Window x:Class="WpfApp1.views.ScannerPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:local="clr-namespace:WpfApp1.views"
+        mc:Ignorable="d"
+        MinWidth="800"
+        Title="ScannerPage" Height="450" Width="800">
+    <Grid Margin="10" x:Name="gridMain" >
+
+      
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <WindowsFormsHost>
+                <wf:PictureBox x:Name="pictureBox2" Width="400" Height="400" SizeMode="StretchImage"  />
+            </WindowsFormsHost>
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Label Content="parking spot number" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="16" Grid.Row="0"/>
+            <Label Content="B4 - 01 " HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="46" Grid.Row="1"/>
+        </Grid>
+    </Grid>
+</Window>
