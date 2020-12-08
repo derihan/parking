@@ -23,17 +23,22 @@ namespace WpfApp1.views
         public DashboardPage()
         {
             InitializeComponent();
-            navigatedPage();
+            navigatedPage("/views/HomePage.xaml");
         }
 
-        private void navigatedPage()
+        private void navigatedPage(string urif)
         {
-            ContentFrame.Navigate(new Uri("/views/HomePage.xaml", UriKind.RelativeOrAbsolute));
+            ContentFrame.Navigate(new Uri(urif, UriKind.RelativeOrAbsolute));
         }
 
         private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            navigatedPage();
+            navigatedPage("/views/HomePage.xaml");
+        }
+
+        private void TextBlock_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        {
+             navigatedPage("/views/ScannerMgm.xaml");
         }
     }
 }
