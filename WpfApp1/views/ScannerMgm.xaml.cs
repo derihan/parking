@@ -12,6 +12,9 @@ using RestSharp.Serialization.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
+using NumSharp;
+
+using IronOcr;
 using Emgu.CV.Util;
 using Emgu.Util;
 using WpfApp1;
@@ -29,15 +32,20 @@ namespace WpfApp1.views
     {
         Colorcvt Cvtc;
         Image<Bgr, byte> imgInput;
-        Image<Gray, byte> imgOut;
+        Image<Gray, byte> binaris;
+        Image<Gray, byte> aoutput;
         Image<Gray, byte> imgBinarisasi;
         Image<Gray, byte> imgGray;
         private Bitmap img;
         private string filedirs;
         private string base64String;
         bool show = false;
+        private int threshH;
+        private int threshV;
+        private int threshS;
+        Image<Gray, byte> edgedetect;
 
-      
+
         public ScannerMgm()
         {
             InitializeComponent();
@@ -75,6 +83,10 @@ namespace WpfApp1.views
             else
             {
                 filedirs = opf.FileName;
+                if (String.IsNullOrEmpty(filedirs))
+                {
+                    return;
+                }
                 var client = new RestClient("http://localhost:8000/ocr-service/");
                 client.Timeout = -1;
                 var request = new RestRequest(Method.POST);
@@ -131,17 +143,78 @@ namespace WpfApp1.views
 
             return result;
         }
-
+        
         public void plate_recognize()
         {
+          
             Bitmap mastImg = new Bitmap(pictureBox2.Image);
             Image<Bgr, byte> imgBit = mastImg.ToImage<Bgr, byte>();
-            //Image<Hsv, byte> grayin = imgBit.Convert<Hsv, byte>();
-            Image<Gray, byte> grayin = imgBit.Convert<Gray, byte>();
-            grayin._ThresholdBinaryInv(new Gray(80), new Gray(255));
-            pictureBox3.Image = grayin.ToBitmap();
-            pictureBox3.Width = grayin.Width;
-            pictureBox3.Height = grayin.Height;
+            
+
+
+            Mat hsv = new Mat();
+
+            CvInvoke.CvtColor(imgBit, hsv, Emgu.CV.CvEnum.ColorConversion.Bgr2Hsv);
+            Mat[] channels = hsv.Split();
+              
+            RangeF H = channels[0].GetValueRange();
+            RangeF S = channels[1].GetValueRange();
+            RangeF V = channels[2].GetValueRange();
+
+            Console.WriteLine(string.Format("Max S {0} Min S {1}", S.Max, S.Min));
+            Console.WriteLine(string.Format("Max V {0} Min V {1}", V.Max, V.Min));
+            Console.WriteLine(string.Format("Max H {0} Min H {1}", H.Max, H.Min));
+           
+
+            MCvScalar mean = CvInvoke.Mean(hsv);
+
+            Console.WriteLine(string.Format("Mean V {0} Mean S {1} Mean V {2} ", mean.V0, mean.V1, mean.V2)); ;
+            var chanel1 = channels[1].Rows;
+
+            binaris = channels[1].ToImage<Gray, byte>();
+
+            if (V.Max > 200 && S.Max > 200 && H.Max > 150 && V.Min < 50 && S.Min < 50 && H.Min < 100 )
+            {
+              
+             
+                binaris._ThresholdBinaryInv(new Gray(153), new Gray(255));
+                binaris._SmoothGaussian(5);
+                binaris._ThresholdBinary(new Gray(164), new Gray(255));
+            }
+            else if (V.Max < 198 && S.Max < 200 && H.Max < 200 )
+            {
+              
+
+                binaris._ThresholdBinary(new Gray(20), new Gray(255));
+
+
+                //imgae background
+                //imgGray = channels[0].ToImage<Gray, byte>();
+                //imgGray._SmoothGaussian(3);
+                //imgGray._ThresholdBinary(new Gray(10), new Gray(255));
+
+                //thresholdvalue = 120;
+                //binaris = imgBit.Convert<Gray, byte>().ThresholdBinaryInv(new Gray(thresholdvalue), new Gray(255));
+            }
+            else
+            {
+               
+                binaris._ThresholdBinary(new Gray(40), new Gray(255));
+            }
+
+
+            var Ocr = new IronTesseract();
+            using (var Input = new OcrInput(binaris.ToBitmap()))
+            {
+                //Input.Deskew();
+                 // only use if accuracy <97%
+                var Result = Ocr.Read(Input);
+                resuttext.Content = Result.Text;
+            }
+
+            CvInvoke.Imshow("S 3", binaris);
+            
+                    
         }
 
         public static T DeserializeJson<T>(string json)
