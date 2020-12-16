@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp1.customcontrols"
+             xmlns:vm="clr-namespace:WpfApp1.views"
              mc:Ignorable="d" 
              x:Name="_this"
              MinWidth="300">
@@ -159,6 +160,7 @@
 
             <TextBox
             x:Name="email"
+            Text="{Binding ElementName=_this, Path=Auth}"
             Style="{StaticResource credentialTXTStyle}"/>
 
             <PasswordBox x:Name="passBox" PasswordChanged="passBox_PasswordChanged" />

@@ -55,5 +55,20 @@ namespace WpfApp1.customcontrols
         {
             email.Text = passBox.Password;
         }
+
+       
+        public string Auth
+        {
+            get
+            {
+                return (string)GetValue(AuthProperty);
+            }
+            set
+            {
+                SetValue(AuthProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty AuthProperty = DependencyProperty.Register("Auth", typeof(string), typeof(TextBocControlls));
     }
 }
