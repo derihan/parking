@@ -203,6 +203,7 @@
                         VerticalAlignment="Center"
                         Grid.Row="1"
                         Style="{StaticResource HoveredText}"
+                        MouseLeftButtonDown="TextBlock_MouseLeftButtonDown"
                         Padding="10">
                         
                          <iconPacks:PackIconFontAwesome 
@@ -216,6 +217,7 @@
                         VerticalAlignment="Center"
                         Grid.Row="2"
                         Style="{StaticResource HoveredText}"
+                        MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_1"
                         Padding="10">
                         
                          <iconPacks:PackIconFontAwesome 
@@ -243,6 +245,7 @@
                         Grid.Row="1"
                         Padding="10"
                         Style="{StaticResource HoveredText}"
+                        MouseLeftButtonDown="TextBlock_MouseLeftButtonDown_2"
                       >
 
                          <iconPacks:PackIconFontAwesome 

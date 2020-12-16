@@ -34,17 +34,8 @@ namespace WpfApp1.views
         Colorcvt Cvtc;
         Image<Bgr, byte> imgInput;
         Image<Gray, byte> binaris;
-        Image<Gray, byte> aoutput;
-        Image<Gray, byte> imgBinarisasi;
-        Image<Gray, byte> imgGray;
-        private Bitmap img;
         private string filedirs;
-        private string base64String;
-        bool show = false;
-        private int threshH;
-        private int threshV;
-        private int threshS;
-        Image<Gray, byte> edgedetect;
+      
 
 
         public ScannerMgm()

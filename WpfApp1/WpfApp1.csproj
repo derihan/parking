@@ -333,14 +333,28 @@
     </Compile>
     <Compile Include="Models\AreaModels.cs" />
     <Compile Include="Models\UserModels.cs" />
+    <Compile Include="Services\AreaServices.cs" />
     <Compile Include="Services\AuthServices.cs" />
+    <Compile Include="ViewModel\AreavIewModels.cs" />
     <Compile Include="ViewModel\AuthViewModels.cs" />
     <Compile Include="ViewModel\ScannerViewModel.cs" />
+    <Compile Include="views\areaModel.xaml.cs">
+      <DependentUpon>areaModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\AreaViews.xaml.cs">
+      <DependentUpon>AreaViews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\DashboardPage.xaml.cs">
       <DependentUpon>DashboardPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="views\FeesViews.xaml.cs">
+      <DependentUpon>FeesViews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\KategoriView.xaml.cs">
+      <DependentUpon>KategoriView.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -371,11 +385,27 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="views\areaModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\AreaViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\DashboardPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="views\FeesViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="views\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\KategoriView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

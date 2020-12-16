@@ -7,7 +7,10 @@
         WindowStartupLocation="CenterScreen"
         xmlns:vm="clr-namespace:WpfApp1.views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="1300">
+        Title="MainWindow" Height="700" Width="1300"
+        MinWidth="950"
+        >
+
     <Grid>
         <Frame Name="menuFrame" />
         <Frame Name="mainFrame" NavigationUIVisibility="Hidden" />
