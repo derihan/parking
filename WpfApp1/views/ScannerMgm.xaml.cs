@@ -12,7 +12,6 @@ using RestSharp.Serialization.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-using NumSharp;
 
 using IronOcr;
 using Emgu.CV.Util;
@@ -22,6 +21,8 @@ using WpfApp1.converters;
 using Application = System.Windows.Forms.Application;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
 
 namespace WpfApp1.views
 {
@@ -209,7 +210,7 @@ namespace WpfApp1.views
                 //Input.Deskew();
                  // only use if accuracy <97%
                 var Result = Ocr.Read(Input);
-                resuttext.Content = Result.Text;
+              
             }
 
             CvInvoke.Imshow("S 3", binaris);
@@ -237,6 +238,25 @@ namespace WpfApp1.views
             ove.Show();
         }
 
-       
+        private static string GenerateNewRandom()
+        {
+            Random generator = new Random();
+            String r = generator.Next(0, 1000000).ToString("D6");
+            if (r.Distinct().Count() == 1)
+            {
+                r = GenerateNewRandom();
+            }
+            return r;
+        }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            var plain = Encoding.UTF8.GetBytes(Convert.ToString(GenerateNewRandom()) + Convert.ToString(licenseP.Text));
+            var qrcode = licenseP.Text;
+            var username = "Parker#" + GenerateNewRandom();
+            var password = Convert.ToBase64String(plain);
+
+           
+        }
     }
 }
