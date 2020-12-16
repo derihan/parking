@@ -40,5 +40,20 @@ namespace WpfApp1.views
         {
              navigatedPage("/views/ScannerMgm.xaml");
         }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/AreaViews.xaml");
+        }
+
+        private void TextBlock_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/KategoriView.xaml");
+        }
+
+        private void TextBlock_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/FeesViews.xaml");
+        }
     }
 }
