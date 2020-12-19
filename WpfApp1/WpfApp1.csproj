@@ -326,15 +326,20 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="converters\Colorcvt.cs" />
-    <Compile Include="converters\ResponsiveUI.cs" />
+    <Compile Include="converters\ComboboxConverter.cs" />
     <Compile Include="customcontrols\TextBocControlls.xaml.cs">
       <DependentUpon>TextBocControlls.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AreaModels.cs" />
+    <Compile Include="Models\FeesModel.cs" />
+    <Compile Include="Models\KategoriModels.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Services\AreaServices.cs" />
     <Compile Include="Services\AuthServices.cs" />
+    <Compile Include="Services\FeesServices.cs" />
+    <Compile Include="Services\GetToken.cs" />
+    <Compile Include="Services\KategoriServices.cs" />
+    <Compile Include="Services\MainServices.cs" />
     <Compile Include="ViewModel\AreavIewModels.cs" />
     <Compile Include="ViewModel\AuthViewModels.cs" />
     <Compile Include="ViewModel\ScannerViewModel.cs" />

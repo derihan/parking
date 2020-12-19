@@ -27,6 +27,7 @@ namespace WpfApp1
         {
             System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             InitializeComponent();
+            this.DataContext = this;
             mainFrame.Navigate(new Uri("/views/LoginPage.xaml", UriKind.RelativeOrAbsolute));
         }
     }

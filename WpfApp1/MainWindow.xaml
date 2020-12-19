@@ -10,7 +10,6 @@
         Title="MainWindow" Height="700" Width="1300"
         MinWidth="950"
         >
-
     <Grid>
         <Frame Name="menuFrame" />
         <Frame Name="mainFrame" NavigationUIVisibility="Hidden" />

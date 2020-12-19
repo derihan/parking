@@ -39,11 +39,13 @@ namespace WpfApp1.ViewModel
             var a_data = _services.LogedIn(username, password);
             if (a_data != null)
             {
-                string folder = @"C:\Users\HP\AppData\Local\";
+                string result = Path.GetTempPath();
+                string folder = result;
                 string fileName = "PkSetting.txt";
                 string fullpath = folder + fileName;
                 string[] json = { a_data };
                 File.WriteAllLines(fullpath, json);
+                Console.WriteLine(result);
                 return true;
             }
             return false;
