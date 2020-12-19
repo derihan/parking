@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,27 +7,38 @@ using System.Threading.Tasks;
 
 namespace WpfApp1.Models
 {
-    public class AreaModels
+    public class AreaModel
     {
-
+       
         private int areaId;
 
+        [JsonProperty("areaId")]
         public int AreaId
         {
             get { return areaId; }
             set { areaId = value; }
         }
 
-        private int areaNumber;
+        private int? areaNumber;
 
-        public int AreaNumber
+        [JsonProperty("areaNumber")]
+        public int? AreaNumber
         {
             get { return areaNumber; }
-            set { areaNumber = value; }
+            set {
+
+                if (!value.Equals(areaNumber))
+                {
+                    areaNumber = null;
+                }
+                areaNumber = value;
+
+            }
         }
 
         private int areaSts;
 
+        [JsonProperty("areaSts")]
         public int AreaSts
         {
             get { return areaSts; }
@@ -35,14 +47,34 @@ namespace WpfApp1.Models
 
         private int feesVal;
 
+        [JsonProperty("fessVal")]
         public int FessValue
         {
             get { return feesVal; }
             set { feesVal = value; }
         }
 
+        private int kategoriId;
+        [JsonProperty("areaKategoriId")]
+        public int KategoriId
+        {
+            get { return kategoriId; }
+            set { kategoriId = value; }
+        }
+
+        private int parkFessId;
+        [JsonProperty("areaParkingFeesId")]
+        public int FessId
+        {
+            get { return parkFessId; }
+            set { parkFessId = value; }
+        }
+
+
+
         private string kategori;
 
+        [JsonProperty("kategori")]
         public string Kategori
         {
             get { return kategori; }
@@ -51,6 +83,7 @@ namespace WpfApp1.Models
 
         private DateTime createdAt;
 
+        [JsonProperty("areaCreatedAt")]
         public DateTime CreatedAt
         {
             get { return createdAt; }

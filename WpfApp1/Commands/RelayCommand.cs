@@ -9,22 +9,27 @@ namespace WpfApp1.Commands
 {
     public class RelayCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged;
-        private Action DoTask;
+      
+        private Action<object> DoTask;
+      
 
-        public RelayCommand(Action task)
+        public RelayCommand(Action<object> task)
         {
             DoTask = task;
+          
         }
+
+        public event EventHandler CanExecuteChanged;
 
         public bool CanExecute(object parameter)
         {
             return true;
         }
 
+
         public void Execute(object parameter)
         {
-            DoTask();
+            DoTask(parameter);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace WpfApp1.Services
                 });
 
                 var response = client.Post(request);
-                Console.WriteLine(response.StatusCode);
+                Console.WriteLine(response.Content);
                 if (response.IsSuccessful)
                 {
                     var toke = response.Content.Replace("\"","");

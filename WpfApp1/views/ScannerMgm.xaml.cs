@@ -31,7 +31,7 @@ namespace WpfApp1.views
     /// </summary>
     public partial class ScannerMgm : Page
     {
-        Colorcvt Cvtc;
+       
         Image<Bgr, byte> imgInput;
         Image<Gray, byte> binaris;
         private string filedirs;
@@ -41,7 +41,7 @@ namespace WpfApp1.views
         public ScannerMgm()
         {
             InitializeComponent();
-            Cvtc = new Colorcvt();
+           
         }
 
         private void GridopenScann_window(object sender, MouseButtonEventArgs e)
@@ -90,9 +90,7 @@ namespace WpfApp1.views
 
                 if (response.IsSuccessful)
                 {
-                    var jObject = JObject.Parse(response.Content);
-
-                    var content = client.Execute(request).Content;
+                   
                     var deserialize = new JsonDeserializer();
                     var output = deserialize.Deserialize<Dictionary<String, string>>(response);
                     var result = output["base64_data"];

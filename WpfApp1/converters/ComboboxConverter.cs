@@ -1,20 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
-using System.Windows.Data;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace WpfApp1.converters
 {
-    public class ResponsiveUI : IValueConverter
+    public class ComboboxConverter : IValueConverter
     {
+        public ComboboxConverter()
+        {
+        }
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return double.TryParse(value.ToString(), out double doubleValue) &&
-                double.TryParse(parameter.ToString(), out double doubleParameter) &&
-                doubleValue > doubleParameter;
+            if (value != null)
+            {
+                string s = value.ToString();
+                Console.WriteLine(s);
+            }
+            return "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
