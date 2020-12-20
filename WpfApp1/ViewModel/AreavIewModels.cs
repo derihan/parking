@@ -46,15 +46,22 @@ namespace WpfApp1.ViewModel
             set { message = value; OnPropertyChanged("Message"); }
         }
 
-        private string visibility;
+        private bool visibility;
 
-        public string Visible
+        public bool Visibility
         {
             get { return visibility; }
-            set { visibility = "hidden"; }
+            set { visibility = value; OnPropertyChanged("Visibility"); }
         }
 
 
+        private SolidColorBrush colorBrush;
+
+        public SolidColorBrush Coloring
+        {
+            get { return colorBrush; }
+            set { colorBrush = value; OnPropertyChanged("Coloring"); }
+        }
 
 
         #region save
@@ -71,26 +78,42 @@ namespace WpfApp1.ViewModel
         }
         public void Save(object sender)
         {
-           
 
-            try
+            if (String.IsNullOrEmpty(CurrentArea.AreaNumber.ToString()) 
+                || String.IsNullOrEmpty(CurrentArea.KategoriId.ToString()) 
+                || String.IsNullOrEmpty(CurrentArea.FessId.ToString())
+                )
             {
-                var saving = _services.SaveData(CurrentArea);
-                if (saving)
+                Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
+                Visibility = true;
+                Message = "Save data failed";
+            }
+            else
+            {
+                 try
                 {
-                    Visible = "Visible";
+                    var saving = _services.SaveData(CurrentArea);
+                    if (saving)
+                    {
+                    Coloring = new SolidColorBrush(Color.FromRgb(46, 204, 113));
+                    Visibility = true;
                     Message = "Area saved";
-                }
-                else
-                {
-                    Visible = "Visible";
+                    }
+                    else
+                    {
+                    Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
+                    Visibility = true;
                     Message = "Save data failed";
+                    }
+                }
+                catch (Exception ex)
+                {
+                Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
+                Visibility = true;
+                Message = ex.Message;
                 }
             }
-            catch (Exception ex)
-            {
-                Message = ex.Message;
-            }
+           
         }
 
         

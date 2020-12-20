@@ -128,17 +128,7 @@
                 <iconPacks:PackIconFontAwesome Name="ikona" Kind="ThLargeSolid"   />
                 <Run Text="Data"  FontWeight="Bold" FontSize="17" />
         </TextBlock>
-        <TextBlock
-            Grid.Row="3"
-            Grid.Column="1"
-            VerticalAlignment="Center"
-            Background="#2ecc71"
-            Padding="6"
-            >
-            <iconPacks:PackIconMaterialLight Name="ikonb" Kind="AlertCircle" FontSize="15" Foreground="White" Margin="14,0,0,0" />
-            <Run Text="Data berhasil disimpan" BaselineAlignment="Center" Foreground="White" />
-        </TextBlock>
-        
+       
 
         <DataGrid x:Name="dgAreas" 
                   Grid.Row="4"
@@ -165,7 +155,7 @@
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnEdit" Content="edit" Width="40" />
+                            <Button x:Name="btnEdit" Content="edit" Width="40"  />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

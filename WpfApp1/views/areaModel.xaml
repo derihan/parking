@@ -31,7 +31,7 @@
         </Style>
         <locvm:AreavIewModels x:Key="vm_area"/>
         <locm:AreaModel x:Key="m_area"/>
-        
+        <cvt:BooleanToVisibilityConverter x:Key="acvt"/>
     </Window.Resources>
     
     <Grid Margin="5" >
@@ -60,7 +60,7 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
-            
+                
                 >
                 <iconPacks:PackIconFontAwesome Name="ikona" Kind="PlusSolid"   />
                 <Run Text="Tambah Data Area "  FontWeight="Bold" FontSize="17" />
@@ -72,10 +72,11 @@
             Grid.Row="1" 
             Grid.Column="1" 
             x:Name="stAlert"
-            Visibility="{Binding Source={StaticResource vm_area}, Path=Visibility}"
+            Background="{Binding Source={StaticResource vm_area}, Path=Coloring}"
+            Visibility="{Binding Source={StaticResource vm_area}, Path=Visibility, Converter={StaticResource acvt}}"
             Grid.ColumnSpan="2" >
-            <iconPacks:PackIconMaterialLight Name="iconc" Kind="AlertCircle" Margin="10,0,0,0" VerticalAlignment="Center" />
-            <Label Margin="10,0,0,0" Content="{Binding Source={StaticResource vm_area}, Path=Message }" VerticalAlignment="Center" />
+            <iconPacks:PackIconMaterialLight Foreground="White" Name="iconc" Kind="AlertCircle" Margin="10,0,0,0" VerticalAlignment="Center" />
+            <Label Margin="10,0,0,0" Foreground="White" Content="{Binding Source={StaticResource vm_area}, Path=Message }" VerticalAlignment="Center" />
         </StackPanel>
         <Label Content="Number " Style="{StaticResource cntere}" Grid.Row="2" Grid.Column="1" />
         <Label Content="Kategori " Style="{StaticResource cntere}" Grid.Row="4" Grid.Column="1"/>
