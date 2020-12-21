@@ -6,10 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp1.Models;
 using WpfApp1.Services;
+using System.Net.Http.Headers;
 
 namespace WpfApp1.Services
 {
@@ -50,6 +52,56 @@ namespace WpfApp1.Services
                     return false;
                 }
             
+        }
+
+        public AreaModel getById(int id)
+        {
+            var client = new RestClient(string.Format("http://localhost:5000/api/data-area/{0}",id));
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("content-type", "application/json");
+            request.AddHeader("Authorization", string.Format("Bearer {0}", new GetToken().getToken()));
+            IRestResponse response = client.Execute(request);
+            
+           
+            if (response.IsSuccessful)
+            {
+                JObject o = JObject.Parse(response.Content);
+
+                AreaModel arm = new AreaModel()
+                {
+                    AreaId = (int)o["areaId"],
+                    AreaNumber = (int)o["areaNumber"],
+                    KategoriId = (int)o["areaKategoriId"],
+                    FessId = (int)o["areaParkingFeesId"]
+                };
+                //Console.WriteLine(o);
+                return arm;
+            }
+            else
+            {
+                return new AreaModel();
+            }
+            return new AreaModel();
+        }
+
+        public bool Delete(int id)
+        {
+           
+            var client = new RestClient(String.Format("http://localhost:5000/api/data-area/{0}",id));
+            var request = new RestRequest(Method.DELETE);
+            request.AddHeader("Authorization", string.Format("Bearer {0}", new GetToken().getToken()));
+            IRestResponse response = client.Execute(request);
+            JObject o = JObject.Parse(response.Content);
+            Console.WriteLine(response.Content);
+
+            if ((string)o["alert"] == "sukses")
+            {
+                return true;
+            }
+
+            return false;
+
         }
 
         public List<AreaModel> GetAll()

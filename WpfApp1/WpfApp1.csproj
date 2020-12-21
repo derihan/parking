@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
+    </Reference>
     <Reference Include="Emgu.CV.Bitmap, Version=4.4.0.4099, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\Emgu.CV.Bitmap.4.4.0.4099\lib\netstandard2.0\Emgu.CV.Bitmap.dll</HintPath>
     </Reference>
@@ -45,6 +48,15 @@
     </Reference>
     <Reference Include="Emgu.CV.Platform.NetStandard, Version=4.4.0.4099, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>..\packages\Emgu.CV.4.4.0.4099\lib\netstandard2.0\Emgu.CV.Platform.NetStandard.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.4.1.0, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
     </Reference>
     <Reference Include="IronOcr, Version=2020.11.2.0, Culture=neutral, PublicKeyToken=c2cbcea5ea3f6d8d, processorArchitecture=MSIL">
       <HintPath>..\packages\IronOcr.2020.11.2\lib\net40\IronOcr.dll</HintPath>
@@ -301,6 +313,9 @@
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -331,6 +346,7 @@
     <Compile Include="customcontrols\TextBocControlls.xaml.cs">
       <DependentUpon>TextBocControlls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IClosable.cs" />
     <Compile Include="Models\AreaModels.cs" />
     <Compile Include="Models\FeesModel.cs" />
     <Compile Include="Models\KategoriModels.cs" />
@@ -343,9 +359,13 @@
     <Compile Include="Services\MainServices.cs" />
     <Compile Include="ViewModel\AreavIewModels.cs" />
     <Compile Include="ViewModel\AuthViewModels.cs" />
+    <Compile Include="ViewModel\ICloseable.cs" />
     <Compile Include="ViewModel\ScannerViewModel.cs" />
-    <Compile Include="views\areaModel.xaml.cs">
-      <DependentUpon>areaModel.xaml</DependentUpon>
+    <Compile Include="views\AreaEditModal.xaml.cs">
+      <DependentUpon>AreaEditModal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="views\areaAddModel.xaml.cs">
+      <DependentUpon>areaAddModel.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\AreaViews.xaml.cs">
       <DependentUpon>AreaViews.xaml</DependentUpon>
@@ -391,7 +411,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="views\areaModel.xaml">
+    <Page Include="views\AreaEditModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="views\areaAddModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

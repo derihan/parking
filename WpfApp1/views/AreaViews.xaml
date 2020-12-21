@@ -4,7 +4,8 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-   
+      xmlns:cvm ="clr-namespace:WpfApp1.ViewModel"
+      xmlns:cvt="clr-namespace:WpfApp1.converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AreaViews">
@@ -71,6 +72,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <cvm:AreavIewModels x:Key="cvm_area"/>
+        <cvt:BooleanToVisibilityConverter x:Key="cvt_alert"/>
     </Page.Resources>
     <Grid Margin="5" >
         <Grid.RowDefinitions>
@@ -128,7 +131,19 @@
                 <iconPacks:PackIconFontAwesome Name="ikona" Kind="ThLargeSolid"   />
                 <Run Text="Data"  FontWeight="Bold" FontSize="17" />
         </TextBlock>
-       
+        <StackPanel
+                VerticalAlignment="Center"
+                Background="{Binding Source={StaticResource cvm_area}, Path=Coloring}"
+                Visibility="{Binding  Source={StaticResource cvm_area}, Path=Visibility, Converter={StaticResource cvt_alert}}"
+                Orientation="Horizontal"
+                Grid.Row="3"
+                Grid.Column="1"
+                Width="Auto"
+                HorizontalAlignment="Stretch" 
+                >
+                <iconPacks:PackIconMaterialLight Name="ikonsa" Kind="AlertCircle" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="White" />
+            <Label Content="{Binding  Source={StaticResource cvm_area}, Path=Message }" Foreground="White" Margin="10,0,0,0" />
+        </StackPanel>
 
         <DataGrid x:Name="dgAreas" 
                   Grid.Row="4"
@@ -143,7 +158,8 @@
                   ItemsSource="{Binding  Path=AreasList}" BorderBrush="{x:Null}"
                   EnableRowVirtualization="False" 
                   RowHeight="30" VerticalAlignment="Top" Background="{x:Null}"
-              
+                  SelectedItem="{Binding  Source={StaticResource cvm_area}, Path=CurrentDelete, Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True"
                   >
            
             <DataGrid.Columns>
@@ -155,14 +171,14 @@
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnEdit" Content="edit" Width="40"  />
+                            <Button x:Name="btnEdit" Content="edit" Width="40" Command="{Binding Source={StaticResource cvm_area}, Path=GetIdCommand }" CommandParameter="{Binding Path=AreaId}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnDel" Content="hapus" Width="40" />
+                            <Button x:Name="btnDel" Content="hapus" Width="40"  Command="{Binding Source={StaticResource cvm_area}, Path=DeleteCommand}" CommandParameter="{Binding Path=AreaId}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -1,16 +1,21 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Command;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
+//using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
-using WpfApp1.Commands;
+using WpfApp1.Interface;
 using WpfApp1.Models;
 using WpfApp1.Services;
+using WpfApp1.views;
+using ownCommand = WpfApp1.Commands;
 
 namespace WpfApp1.ViewModel
 {
@@ -19,23 +24,25 @@ namespace WpfApp1.ViewModel
         private AreaServices _services;
         private KategoriServices _katservice;
         private FeesServices _feeservices;
-        private RelayCommand saveCommand;
-        private RelayCommand _clicking;
+        private Thread _thread;
+        
+
 
         #region constructor
         public AreavIewModels()
         {
-            
-                
-                _katservice = new KategoriServices();
-                _feeservices = new FeesServices();
-                CurrentArea = new AreaModel();
-                saveCommand = new RelayCommand(Save);
-                LoadKategori();
-                LoadFees();
-                _services = new AreaServices();
-                LoadData();
-           
+
+            _katservice = new KategoriServices();
+            _feeservices = new FeesServices();
+            CurrentArea = new AreaModel();
+            SaveCommand = new RelayCommand<IClosable>(Save);
+            getIdCommand = new ownCommand.RelayCommand(GetById);
+            EditCommand = new RelayCommand<IClosable>(Edit);
+            deleteCommand = new ownCommand.RelayCommand(Deleted);
+            _services = new AreaServices();
+            LoadData();
+            LoadKategori();
+            LoadFees();
         }
         #endregion
 
@@ -55,6 +62,15 @@ namespace WpfApp1.ViewModel
         }
 
 
+        private AreaModel currentDelete;
+            
+        public AreaModel CurrentDelete
+        {
+            get { return currentDelete; }
+            set { currentDelete = value; OnPropertyChanged("CurrentDelete"); }
+        }
+
+
         private SolidColorBrush colorBrush;
 
         public SolidColorBrush Coloring
@@ -62,7 +78,102 @@ namespace WpfApp1.ViewModel
             get { return colorBrush; }
             set { colorBrush = value; OnPropertyChanged("Coloring"); }
         }
+        #region delet
+        private ownCommand.RelayCommand deleteCommand;
 
+        public ownCommand.RelayCommand DeleteCommand
+        {
+            get { return deleteCommand; }
+        }
+
+        public void Deleted(object id)
+        {
+           
+            var confirm = MessageBox.Show(string.Format("this data {0} has ben deleted are you sure ?", CurrentDelete.AreaNumber), "Confirm", MessageBoxButtons.YesNo);
+
+            if (confirm == DialogResult.Yes)
+            {
+                var data = _services.Delete((int)id);
+                if (data)
+                {
+                    Coloring = new SolidColorBrush(Color.FromRgb(46, 204, 113));
+                    Visibility = true;
+                    Message = "Delete Data successfull";
+                    LoadData();
+
+                }
+                else
+                {
+                    Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
+                    Visibility = true;
+                    Message = "Delete data failed";
+                }
+            }
+
+        }
+
+        #endregion
+
+        #region edit
+        private ownCommand.RelayCommand getIdCommand;
+
+        public ownCommand.RelayCommand GetIdCommand
+        {
+            get { return getIdCommand; }
+        }
+
+        public RelayCommand<IClosable> EditCommand
+        {
+            get;
+            private set;
+        }
+
+        private AreaModel areabyid;
+        public AreaModel Areabyid
+        {
+            get { return areabyid; }
+            set { areabyid = value; OnPropertyChanged("Areabyid"); }
+        }
+
+
+        public void GetById(object id)
+        {
+            int ids = (int)id;
+            Areabyid =_services.getById(ids);
+            if (!String.IsNullOrEmpty(Areabyid.AreaId.ToString()))
+            {
+                AreaEditModal edited = new AreaEditModal();
+                edited.Show();
+            }
+        }
+
+        public async void Edit(IClosable window)
+        {
+            var id = currentDelete.AreaId;
+            if (String.IsNullOrEmpty(CurrentArea.AreaNumber.ToString())
+                || String.IsNullOrEmpty(CurrentArea.KategoriId.ToString())
+                || String.IsNullOrEmpty(CurrentArea.FessId.ToString())
+                )
+            {
+                Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
+                Visibility = true;
+                Message = "Edit data failed";
+               
+            }
+            else
+            {
+                Coloring = new SolidColorBrush(Color.FromRgb(46, 204, 113));
+                Visibility = true;
+                Message = "Area saved";
+                var cs = await delayid();
+                if (cs)
+                {
+                    window.Close();
+                }
+            }
+        }
+
+        #endregion
 
         #region save
         private AreaModel _areacurrent;
@@ -72,12 +183,27 @@ namespace WpfApp1.ViewModel
             set { _areacurrent = value; OnPropertyChanged("CurrentArea"); }
         }
 
-        public RelayCommand SaveCommand
+        public RelayCommand<IClosable> SaveCommand
         {
-            get { return saveCommand; }
+            get;
+            private set;
         }
-        public void Save(object sender)
+
+    
+
+        async Task<bool> delayid()
         {
+            await Task.Delay(3000);
+            return true;
+        }
+
+  
+        public async void Save(IClosable window)
+        {
+
+            var canceakationTokenS = new CancellationTokenSource();
+            var calcToken = canceakationTokenS.Token;
+
 
             if (String.IsNullOrEmpty(CurrentArea.AreaNumber.ToString()) 
                 || String.IsNullOrEmpty(CurrentArea.KategoriId.ToString()) 
@@ -90,28 +216,28 @@ namespace WpfApp1.ViewModel
             }
             else
             {
-                 try
+               
+                var saving = _services.SaveData(CurrentArea);
+                if (saving)
                 {
-                    var saving = _services.SaveData(CurrentArea);
-                    if (saving)
-                    {
+                 
                     Coloring = new SolidColorBrush(Color.FromRgb(46, 204, 113));
                     Visibility = true;
                     Message = "Area saved";
-                    }
-                    else
+                    AreasList.Add(CurrentArea);
+                    var cs = await delayid();
+                    if (cs)
                     {
+                        window.Close();
+                    }
+                }
+                else
+                {
                     Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
                     Visibility = true;
                     Message = "Save data failed";
-                    }
                 }
-                catch (Exception ex)
-                {
-                Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));
-                Visibility = true;
-                Message = ex.Message;
-                }
+              
             }
            
         }
@@ -121,6 +247,8 @@ namespace WpfApp1.ViewModel
 
         #region porperty notify
         public event PropertyChangedEventHandler PropertyChanged;
+       
+
         private void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
@@ -137,7 +265,7 @@ namespace WpfApp1.ViewModel
             set
             {
                 areas = value;
-                OnPropertyChanged("areas");
+                OnPropertyChanged("AreasList");
             }
         }
 
@@ -160,6 +288,9 @@ namespace WpfApp1.ViewModel
         #endregion
         #region data fees
         private IEnumerable<FeesModel> feesModel;
+        private object areasVi;
+        private AreaViews _areaViews;
+
         public IEnumerable<FeesModel> FeesModels
         {
             get { return feesModel; }
@@ -170,5 +301,7 @@ namespace WpfApp1.ViewModel
             FeesModels = new List<FeesModel>(_feeservices.GetFees());
         }
         #endregion
+
+     
     }
 }

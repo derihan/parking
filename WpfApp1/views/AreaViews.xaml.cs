@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Models;
 using WpfApp1.ViewModel;
+
 
 namespace WpfApp1.views
 {
@@ -33,8 +35,14 @@ namespace WpfApp1.views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            areaModel modalWindow = new areaModel(_areaModel);
+            AreaAddModel modalWindow = new AreaAddModel();
             modalWindow.Show();
+        }
+
+        public void refreshGrid(ObservableCollection<AreaModel> areas)
+        {
+            dgAreas.ItemsSource = areas;
+            
         }
 
         private void dgAreas_LoadingRow(object sender, DataGridRowEventArgs e)
