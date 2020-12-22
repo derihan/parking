@@ -87,7 +87,9 @@ namespace WpfApp1.Models
         public DateTime CreatedAt
         {
             get { return createdAt; }
-            set { createdAt = value; }
+            set {
+                createdAt = value;
+            }
         }
 
     }

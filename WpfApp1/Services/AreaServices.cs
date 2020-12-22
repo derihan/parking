@@ -25,33 +25,42 @@ namespace WpfApp1.Services
         {
         }
 
-        public bool SaveData(AreaModel _area)
+        public AreaModel SaveData(AreaModel _area)
         {
-            
-                var client = new RestClient("http://localhost:5000/api/data-area");
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "application/json");
-                request.AddHeader("Accept", "application/json");
-                request.AddHeader("Authorization", string.Format("Bearer {0}", new GetToken().getToken()));
-                request.RequestFormat = DataFormat.Json;
-                request.AddJsonBody(new
-                {
-                    AreaNumber = _area.AreaNumber,
-                    AreaKategoriId = _area.KategoriId,
-                    AreaParkingFeesId = _area.FessId
-                });
+           var client = new RestClient("http://localhost:5000/api/data-area");
+           var request = new RestRequest(Method.POST);
+           request.AddHeader("Content-Type", "application/json");
+           request.AddHeader("Accept", "application/json");
+           request.AddHeader("Authorization", string.Format("Bearer {0}", new GetToken().getToken()));
+           request.RequestFormat = DataFormat.Json;
+           request.AddJsonBody(new{
+               AreaNumber = _area.AreaNumber,
+               AreaKategoriId = _area.KategoriId,
+               AreaParkingFeesId = _area.FessId
+          });
 
-                var response = client.Post(request);
-                Console.WriteLine(response.StatusCode);
-                if (response.IsSuccessful)
+         var response = client.Post(request);
+         Console.WriteLine(response.Content);
+         var oke = response.StatusCode.ToString();
+            if (oke == "Created"){
+                JObject o = JObject.Parse(response.Content);
+                Console.WriteLine(o["data"]);
+               
+                AreaModel arm = new AreaModel()
                 {
-                    return true;
-                }
+                    AreaId = (int)o["data"]["areaId"],
+                    AreaNumber = (int)o["data"]["areaNumber"],
+                    Kategori = (string)o["data"]["kategori"],
+                    FessValue = (int)o["data"]["fessVal"],
+                    
+                };
+               
+                return arm;
+             }
                 else
-                {
-                    return false;
-                }
-            
+             {
+                 return new AreaModel();
+             }
         }
 
         public AreaModel getById(int id)
@@ -62,8 +71,6 @@ namespace WpfApp1.Services
             request.AddHeader("content-type", "application/json");
             request.AddHeader("Authorization", string.Format("Bearer {0}", new GetToken().getToken()));
             IRestResponse response = client.Execute(request);
-            
-           
             if (response.IsSuccessful)
             {
                 JObject o = JObject.Parse(response.Content);
@@ -73,7 +80,8 @@ namespace WpfApp1.Services
                     AreaId = (int)o["areaId"],
                     AreaNumber = (int)o["areaNumber"],
                     KategoriId = (int)o["areaKategoriId"],
-                    FessId = (int)o["areaParkingFeesId"]
+                    FessId = (int)o["areaParkingFeesId"],
+                    CreatedAt = DateTime.UtcNow,
                 };
                 //Console.WriteLine(o);
                 return arm;
@@ -87,21 +95,16 @@ namespace WpfApp1.Services
 
         public bool Delete(int id)
         {
-           
             var client = new RestClient(String.Format("http://localhost:5000/api/data-area/{0}",id));
             var request = new RestRequest(Method.DELETE);
             request.AddHeader("Authorization", string.Format("Bearer {0}", new GetToken().getToken()));
             IRestResponse response = client.Execute(request);
             JObject o = JObject.Parse(response.Content);
-            Console.WriteLine(response.Content);
-
             if ((string)o["alert"] == "sukses")
             {
                 return true;
             }
-
             return false;
-
         }
 
         public List<AreaModel> GetAll()

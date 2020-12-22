@@ -33,21 +33,5 @@ namespace WpfApp1.views
             this.DataContext = _areaModel;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            AreaAddModel modalWindow = new AreaAddModel();
-            modalWindow.Show();
-        }
-
-        public void refreshGrid(ObservableCollection<AreaModel> areas)
-        {
-            dgAreas.ItemsSource = areas;
-            
-        }
-
-        private void dgAreas_LoadingRow(object sender, DataGridRowEventArgs e)
-        {
-          
-        }
     }
 }

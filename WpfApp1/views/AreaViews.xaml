@@ -119,7 +119,7 @@
             <Label Content="Search Data" Grid.Row="0" Grid.Column="1" />
             <TextBox Name="txtFind" Width="140" Height="20" Grid.Row="1" HorizontalAlignment="Left"  Grid.Column="1" VerticalAlignment="Top"  />
             <Button Width="60"  Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Content="Search" />
-            <Button Width="60" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" Content="Add data" Click="Button_Click" />
+            <Button Width="60" Margin="10,0,0,0" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" Content="Add data" Command="{Binding AddDataCommand}"/>
         </Grid>
         <TextBlock
                 VerticalAlignment="Center"
@@ -155,10 +155,10 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   HeadersVisibility="Column"
                   CanUserResizeColumns="False"
-                  ItemsSource="{Binding  Path=AreasList}" BorderBrush="{x:Null}"
+                  ItemsSource="{Binding  Path=AreaData}" BorderBrush="{x:Null}"
                   EnableRowVirtualization="False" 
                   RowHeight="30" VerticalAlignment="Top" Background="{x:Null}"
-                  SelectedItem="{Binding  Source={StaticResource cvm_area}, Path=CurrentDelete, Mode=TwoWay}"
+                
                   IsSynchronizedWithCurrentItem="True"
                   >
            
@@ -171,14 +171,14 @@
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnEdit" Content="edit" Width="40" Command="{Binding Source={StaticResource cvm_area}, Path=GetIdCommand }" CommandParameter="{Binding Path=AreaId}" />
+                            <Button x:Name="btnEdit" Content="edit" Width="40" Command="" CommandParameter="" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnDel" Content="hapus" Width="40"  Command="{Binding Source={StaticResource cvm_area}, Path=DeleteCommand}" CommandParameter="{Binding Path=AreaId}" />
+                            <Button x:Name="btnDel" Content="hapus" Width="40"  Command="" CommandParameter="" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

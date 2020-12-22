@@ -19,19 +19,14 @@ namespace WpfApp1.views
     /// <summary>
     /// Interaction logic for AreaEditModal.xaml
     /// </summary>
-    public partial class AreaEditModal : Window
+    public partial class AreaEditWindow : Window
     {
-        public AreaEditModal()
+        public AreaEditWindow()
         {
             InitializeComponent();
-            AreavIewModels avm = new AreavIewModels();
-            this.DataContext = avm;
+           
         }
 
-        private void MyWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            // do work here
-        }
-
+      
     }
 }
