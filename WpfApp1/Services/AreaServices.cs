@@ -44,7 +44,7 @@ namespace WpfApp1.Services
          var oke = response.StatusCode.ToString();
             if (oke == "Created"){
                 JObject o = JObject.Parse(response.Content);
-                Console.WriteLine(o["data"]);
+                
                
                 AreaModel arm = new AreaModel()
                 {

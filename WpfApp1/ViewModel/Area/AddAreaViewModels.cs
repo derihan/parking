@@ -11,14 +11,13 @@ using WpfApp1.Commands;
 using WpfApp1.Models;
 using WpfApp1.Services;
 
-namespace WpfApp1.ViewModel
+namespace WpfApp1.ViewModel.Area
 {
     public class AddAreaViewModels : INotifyPropertyChanged
     {
         private AreaModel area;
         AreaServices _services = new AreaServices();
         AreavIewModels _areavm = new AreavIewModels();
-
         #region notifikasi
         private SolidColorBrush colorBrush;
 
@@ -49,11 +48,13 @@ namespace WpfApp1.ViewModel
             get { return area; }
             set { area = value; OnPropertyChanged("CurrentArea"); }
         }
-        
+
         public AddAreaViewModels(AreaModel areas)
         {
             CurrentArea = areas;
         }
+
+      
 
         private ICommand saveareaCommand;
 
@@ -65,21 +66,17 @@ namespace WpfApp1.ViewModel
                     saveareaCommand = new RelayCommand(Save);
                 return saveareaCommand;
             }
-
         }
 
         private AreaModel currentAdd;
-
         public AreaModel CurrentAdd
         {
             get { return currentAdd; }
             set { currentAdd = value; OnPropertyChanged("CurrentAdd"); }
         }
 
-
         public async void Save()
-        {
-           
+        {            
             if (String.IsNullOrEmpty(CurrentArea.AreaNumber.ToString())
                 || String.IsNullOrEmpty(CurrentArea.KategoriId.ToString())
                 || String.IsNullOrEmpty(CurrentArea.FessId.ToString())
@@ -97,7 +94,7 @@ namespace WpfApp1.ViewModel
                 var saving = _services.SaveData(CurrentArea);
                 if (saving != null)
                 {
-                    Console.WriteLine(saving);
+                    
                     Coloring = new SolidColorBrush(Color.FromRgb(46, 204, 113));
                     Visibility = true;
                     Message = "Area saved";

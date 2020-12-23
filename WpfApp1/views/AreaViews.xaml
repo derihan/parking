@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-      xmlns:cvm ="clr-namespace:WpfApp1.ViewModel"
+      xmlns:cvm ="clr-namespace:WpfApp1.ViewModel.Area"
       xmlns:cvt="clr-namespace:WpfApp1.converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -145,6 +145,7 @@
             <Label Content="{Binding  Source={StaticResource cvm_area}, Path=Message }" Foreground="White" Margin="10,0,0,0" />
         </StackPanel>
 
+
         <DataGrid x:Name="dgAreas" 
                   Grid.Row="4"
                   Grid.Column="1"
@@ -158,12 +159,9 @@
                   ItemsSource="{Binding  Path=AreaData}" BorderBrush="{x:Null}"
                   EnableRowVirtualization="False" 
                   RowHeight="30" VerticalAlignment="Top" Background="{x:Null}"
-                
-                  IsSynchronizedWithCurrentItem="True"
-                  >
-           
+                  SelectedItem="{Binding Source={StaticResource cvm_area}, Path=SelectArea, Mode=TwoWay}"
+                  IsSynchronizedWithCurrentItem="True" >
             <DataGrid.Columns>
-
                 <DataGridTextColumn Header="Area Number" Width="150"  Binding="{Binding Path=AreaNumber}" />
                 <DataGridTextColumn Header="Area Hall" Width="130"  Binding="{Binding Path=Kategori}"  />
                 <DataGridTextColumn Header="Salaray per hour" Width="200" Binding="{Binding Path=FessValue}"  />
@@ -171,14 +169,14 @@
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnEdit" Content="edit" Width="40" Command="" CommandParameter="" />
+                            <Button x:Name="btnEdit" Content="edit" Width="40"  Command="{Binding Source={StaticResource cvm_area},Path=EditAreaCommand}"  />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="btnDel" Content="hapus" Width="40"  Command="" CommandParameter="" />
+                            <Button x:Name="btnDel" Content="hapus" Width="40"  Command="{Binding Source={StaticResource cvm_area},Path=Deleteareacommand}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

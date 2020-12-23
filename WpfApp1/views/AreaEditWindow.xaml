@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp1.views"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
        
-         xmlns:locvm="clr-namespace:WpfApp1.ViewModel"
+         xmlns:locvm="clr-namespace:WpfApp1.ViewModel.Area"
         xmlns:locm="clr-namespace:WpfApp1.Models"
         xmlns:cvt="clr-namespace:WpfApp1.converters"
         mc:Ignorable="d"
@@ -83,30 +83,36 @@
         
         <TextBox Grid.Row="2" 
                  Style="{StaticResource tcenter}" 
-                 Text="{Binding Source={StaticResource vm_area}, Path=Areabyid.AreaId, Mode=TwoWay}" 
+                 Text="{Binding Path=AreaSelceted.AreaId, Mode=TwoWay}" 
                  x:Name="txtNum"
                  Grid.Column="2" />
         <ComboBox Grid.Row="4" 
                   ItemsSource="{Binding Source={StaticResource vm_area}, Path=Kategoris, Mode=OneWay}" 
                   DisplayMemberPath="KategoriHall"
                   SelectedValuePath="KategoriId"
-                  SelectedValue="{Binding Source={StaticResource vm_area}, Path=Areabyid.KategoriId, Mode=TwoWay}"
+                  
+                  SelectedItem="{Binding Path=AreaSelceted.KategoriId ,Mode=TwoWay }"
+                  SelectedValue="{Binding Path=AreaSelceted.Kategori}"
                   Style="{StaticResource cbcenter}" 
                   Grid.Column="2" 
                   Name="cbKat"
                   />
         <ComboBox Grid.Row="6" 
                   Style="{StaticResource cbcenter}" 
-                  ItemsSource="{Binding Source={StaticResource vm_area}, Path=FeesModels, Mode=OneWay}" 
-                  SelectedValue="{Binding Source={StaticResource vm_area}, Path=Areabyid.FessId, Mode=TwoWay}"
                   DisplayMemberPath="FeesValue"
                   SelectedValuePath="ParkFeesId"
+                 
+                  ItemsSource="{Binding Source={StaticResource vm_area}, Path=FeesModels, Mode=OneWay}"
+                  SelectedItem="{Binding Path=AreaSelceted.FessId,Mode=TwoWay}"
+                  SelectedValue="{Binding Path=AreaSelceted.FessId}"
                   Grid.Column="2" />
+
+
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="3" Grid.Column="2"  />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="5" Grid.Column="2" />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="7" Grid.Column="2" />
         <StackPanel Grid.Row="8" Grid.Column="2" Orientation="Horizontal"  >
-            <Button Content="Save" Height="30" Tag="stAlert" Width="70"  Command="{Binding Source={StaticResource vm_area}, Path=EditCommand}" CommandParameter="{Binding Source={StaticResource vm_area},Path=Areabyid.AreaId}" />
+            <Button Content="Save" Height="30" Tag="stAlert" Width="70"  Command="{Binding EditSaveCommand}" />
             <Button Content="Cancel" Height="30" Width="70"  Margin="10,0,0,0" />
         </StackPanel>
     </Grid>
