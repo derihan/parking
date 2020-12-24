@@ -11,7 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using WpfApp1.ViewModel;
+using WpfApp1.Models;
+using WpfApp1.ViewModel.Area;
 
 
 namespace WpfApp1.views
@@ -19,19 +20,22 @@ namespace WpfApp1.views
     /// <summary>
     /// Interaction logic for AreaEditModal.xaml
     /// </summary>
-    public partial class AreaEditModal : Window
+    public partial class AreaEditWindow : Window, IDisposable
     {
-        public AreaEditModal()
+        public EditAreaViewModels EditAreaViewModels;
+        public AreaEditWindow(AreaModel selecteditem)
         {
             InitializeComponent();
-            AreavIewModels avm = new AreavIewModels();
-            this.DataContext = avm;
+            EditAreaViewModels = new EditAreaViewModels(selecteditem);
+            DataContext = EditAreaViewModels;
+            
         }
 
-        private void MyWindow_Loaded(object sender, RoutedEventArgs e)
+        public void Dispose()
         {
-            // do work here
+            EditAreaViewModels = null;
+            GC.SuppressFinalize(this);
+            GC.Collect();
         }
-
     }
 }

@@ -350,6 +350,7 @@
     <Compile Include="Models\AreaModels.cs" />
     <Compile Include="Models\FeesModel.cs" />
     <Compile Include="Models\KategoriModels.cs" />
+    <Compile Include="Models\SelectedFeesModel.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Services\AreaServices.cs" />
     <Compile Include="Services\AuthServices.cs" />
@@ -357,15 +358,16 @@
     <Compile Include="Services\GetToken.cs" />
     <Compile Include="Services\KategoriServices.cs" />
     <Compile Include="Services\MainServices.cs" />
-    <Compile Include="ViewModel\AreavIewModels.cs" />
+    <Compile Include="ViewModel\Area\AddAreaViewModels.cs" />
+    <Compile Include="ViewModel\Area\AreavIewModels.cs" />
+    <Compile Include="ViewModel\Area\EditAreaViewModels.cs" />
     <Compile Include="ViewModel\AuthViewModels.cs" />
-    <Compile Include="ViewModel\ICloseable.cs" />
     <Compile Include="ViewModel\ScannerViewModel.cs" />
-    <Compile Include="views\AreaEditModal.xaml.cs">
-      <DependentUpon>AreaEditModal.xaml</DependentUpon>
+    <Compile Include="views\AreaEditWindow.xaml.cs">
+      <DependentUpon>AreaEditWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="views\areaAddModel.xaml.cs">
-      <DependentUpon>areaAddModel.xaml</DependentUpon>
+    <Compile Include="views\AreaAddWindow.xaml.cs">
+      <DependentUpon>AreaAddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\AreaViews.xaml.cs">
       <DependentUpon>AreaViews.xaml</DependentUpon>
@@ -411,11 +413,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="views\AreaEditModal.xaml">
+    <Page Include="views\AreaEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="views\areaAddModel.xaml">
+    <Page Include="views\AreaAddWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
