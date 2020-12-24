@@ -95,12 +95,9 @@
         <ComboBox Grid.Row="6" 
                   Style="{StaticResource cbcenter}" 
                   ItemsSource="{Binding Source={StaticResource vm_area},Path=CollectionFees, Mode=OneWay}"
-                  IsSynchronizedWithCurrentItem="True"
-                  DisplayMemberPath="ParkFeesValue" 
-                  SelectedValuePath="" 
-                  Grid.Column="2" 
-                  SelectedItem="{Binding Path=AreaSelceted.ParkFeesId}"/>
-    
+                  
+                  Grid.Column="2"  />
+
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="3" Grid.Column="2"  />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="5" Grid.Column="2" />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="7" Grid.Column="2" />

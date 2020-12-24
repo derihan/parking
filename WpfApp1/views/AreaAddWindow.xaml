@@ -100,9 +100,9 @@
         
         <ComboBox Grid.Row="6" 
                   Style="{StaticResource cbcenter}" 
-                  ItemsSource="{Binding  Source={StaticResource vm_area},  Path=FeesModels, Mode=OneWay}" 
+                  ItemsSource="{Binding  Source={StaticResource vm_area},  Path=CollectionFees, Mode=OneWay}" 
                   SelectedValue="{Binding Path=CurrentArea.ParkFeesId, Mode=TwoWay}"
-                  DisplayMemberPath="FeesValue"
+                  DisplayMemberPath="ParkFeesValue"
                   SelectedValuePath="ParkFeesId"
                   Grid.Column="2" />
         

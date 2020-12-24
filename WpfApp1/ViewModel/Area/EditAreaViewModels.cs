@@ -16,7 +16,7 @@ namespace WpfApp1.ViewModel.Area
     {
 
         AreaServices _services = new AreaServices();
-        AreavIewModels areas = new AreavIewModels();
+      
 
         private AreaModel areamodel;    
 
@@ -33,8 +33,6 @@ namespace WpfApp1.ViewModel.Area
             get { return selectKategori; }
             set { selectKategori = value; }
         }
-
-    
 
         public EditAreaViewModels(AreaModel seletItem)
         {
