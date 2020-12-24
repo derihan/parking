@@ -37,7 +37,7 @@ namespace WpfApp1.Services
                 JArray a = (JArray)o["data"];
 
                 List<FeesModel> person = a.ToObject<List<FeesModel>>();
-                Console.WriteLine(a);
+                
                 return person;
             }
             else

@@ -350,7 +350,6 @@
     <Compile Include="Models\AreaModels.cs" />
     <Compile Include="Models\FeesModel.cs" />
     <Compile Include="Models\KategoriModels.cs" />
-    <Compile Include="Models\ListFees.cs" />
     <Compile Include="Models\SelectedFeesModel.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Services\AreaServices.cs" />

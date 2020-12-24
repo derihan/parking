@@ -48,7 +48,7 @@ namespace WpfApp1.Models
         private int feesVal;
 
         [JsonProperty("fessVal")]
-        public int FessValue
+        public int ParkFeesValue
         {
             get { return feesVal; }
             set { feesVal = value; }
@@ -64,7 +64,7 @@ namespace WpfApp1.Models
 
         private int parkFessId;
         [JsonProperty("areaParkingFeesId")]
-        public int FessId
+        public int ParkFeesId
         {
             get { return parkFessId; }
             set { parkFessId = value; }

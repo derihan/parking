@@ -31,8 +31,9 @@ namespace WpfApp1.ViewModel.Area
         public AreavIewModels()
         {
             getdata();
-            LoadFees();
+          
             LoadKategori();
+            collectionFees();
         }
         #endregion
 
@@ -71,9 +72,7 @@ namespace WpfApp1.ViewModel.Area
             set { selectArea = value; OnPropertyChanged("SelectArea"); }
         }
 
-
         private ObservableCollection<AreaModel> areasData;
-
         public ObservableCollection<AreaModel> AreaData
         {
             get { return areasData; }
@@ -105,6 +104,8 @@ namespace WpfApp1.ViewModel.Area
         AreaEditWindow EditWindow;
         private void Edit()
         {
+         
+          
             if (EditWindow == null)
             {
 
@@ -184,9 +185,6 @@ namespace WpfApp1.ViewModel.Area
         {
             window.Dispose();
             window = null;
-
-
-
         }
 
         private List<FeesModel> feesModel;
@@ -198,9 +196,36 @@ namespace WpfApp1.ViewModel.Area
 
         public void LoadFees()
         {
-
             FeesModels = new List<FeesModel>(_feeservices.GetFees());
         }
+
+        private SelectedFeesModel _selectedFees;
+        public SelectedFeesModel SelectedFees
+        {
+            get { return _selectedFees; }
+            set
+            {
+                _selectedFees = value;
+                OnPropertyChanged(nameof(SelectedFees));
+            }
+
+        }
+
+        public ObservableCollection<SelectedFeesModel> CollectionFees { get; set; }
+        public void collectionFees()
+        {
+                LoadFees();
+                var itemid = FeesModels;
+                CollectionFees = new ObservableCollection<SelectedFeesModel>();
+                foreach (var item in itemid)
+                {
+                    CollectionFees.Add(new SelectedFeesModel { ParkFeesId = item.ParkFeesId, ParkFeesValue = item.FeesValue });
+                }
+          
+           
+        }
+
+       
         private IEnumerable<KategoriModels> kategoris;
         public IEnumerable<KategoriModels> Kategoris
         {
@@ -215,7 +240,6 @@ namespace WpfApp1.ViewModel.Area
 
         #region deletedata
         private ICommand deleteareacommand;
-
         public ICommand Deleteareacommand
         {
             get

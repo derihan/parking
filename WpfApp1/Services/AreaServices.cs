@@ -36,7 +36,7 @@ namespace WpfApp1.Services
            request.AddJsonBody(new{
                AreaNumber = _area.AreaNumber,
                AreaKategoriId = _area.KategoriId,
-               AreaParkingFeesId = _area.FessId
+               AreaParkingFeesId = _area.ParkFeesId
           });
 
          var response = client.Post(request);
@@ -51,7 +51,7 @@ namespace WpfApp1.Services
                     AreaId = (int)o["data"]["areaId"],
                     AreaNumber = (int)o["data"]["areaNumber"],
                     Kategori = (string)o["data"]["kategori"],
-                    FessValue = (int)o["data"]["fessVal"],
+                    ParkFeesValue = (int)o["data"]["fessVal"],
                     
                 };
                
@@ -80,7 +80,7 @@ namespace WpfApp1.Services
                     AreaId = (int)o["areaId"],
                     AreaNumber = (int)o["areaNumber"],
                     KategoriId = (int)o["areaKategoriId"],
-                    FessId = (int)o["areaParkingFeesId"],
+                    ParkFeesId = (int)o["areaParkingFeesId"],
                     CreatedAt = DateTime.UtcNow,
                 };
                 //Console.WriteLine(o);
@@ -122,7 +122,7 @@ namespace WpfApp1.Services
                 JObject o = JObject.Parse(response.Content);
 
                 JArray a = (JArray)o["data"];
-
+               
                 List<AreaModel> person = a.ToObject<List<AreaModel>>();
 
                 return person;

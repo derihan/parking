@@ -87,24 +87,25 @@
                  Text="{Binding Path=CurrentArea.AreaNumber,  TargetNullValue='', Mode=TwoWay}" 
                  x:Name="txtNum"
                  Grid.Column="2" />
+        
         <ComboBox Grid.Row="4" 
                   ItemsSource="{Binding Source={StaticResource vm_area}, Path=Kategoris, Mode=OneWay}" 
                   DisplayMemberPath="KategoriHall"
                   SelectedValuePath="KategoriId"
                   SelectedValue="{Binding Path=CurrentArea.KategoriId, Mode=TwoWay}"
-                 
                   Style="{StaticResource cbcenter}" 
                   Grid.Column="2" 
                   Name="cbKat"
                   />
+        
         <ComboBox Grid.Row="6" 
                   Style="{StaticResource cbcenter}" 
                   ItemsSource="{Binding  Source={StaticResource vm_area},  Path=FeesModels, Mode=OneWay}" 
-                  SelectedValue="{Binding Path=CurrentArea.FessId, Mode=TwoWay}"
-                 
+                  SelectedValue="{Binding Path=CurrentArea.ParkFeesId, Mode=TwoWay}"
                   DisplayMemberPath="FeesValue"
                   SelectedValuePath="ParkFeesId"
                   Grid.Column="2" />
+        
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="3" Grid.Column="2"  />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="5" Grid.Column="2" />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="7" Grid.Column="2" />

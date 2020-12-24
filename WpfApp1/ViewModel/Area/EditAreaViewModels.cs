@@ -9,12 +9,14 @@ using WpfApp1.Commands;
 using WpfApp1.Models;
 using WpfApp1.Services;
 
+
 namespace WpfApp1.ViewModel.Area
 {
     public class EditAreaViewModels
     {
 
         AreaServices _services = new AreaServices();
+        AreavIewModels areas = new AreavIewModels();
 
         private AreaModel areamodel;    
 
@@ -32,16 +34,11 @@ namespace WpfApp1.ViewModel.Area
             set { selectKategori = value; }
         }
 
-        private int selectFees;
-
-        public int SelecrFees
-        {
-            get { return selectFees; }
-            set { selectFees = value; }
-        }
+    
 
         public EditAreaViewModels(AreaModel seletItem)
         {
+           
             AreaSelceted = seletItem;
            
         }
@@ -62,7 +59,7 @@ namespace WpfApp1.ViewModel.Area
 
         private void Save()
         {
-
+            Console.WriteLine(AreaSelceted.ParkFeesId);
         }
 
     }

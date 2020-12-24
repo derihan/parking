@@ -9,12 +9,22 @@ namespace WpfApp1.Models
     public class SelectedFeesModel
     {
 
-        public int id;
+        private int _parkfeesid;
 
-        public SelectedFeesModel(int id)
+        public int ParkFeesId
         {
-            this.id = id;
+            get { return _parkfeesid; }
+            set { _parkfeesid = value; }
         }
+
+        private int _parkFeesValue;
+
+        public int ParkFeesValue
+        {
+            get { return _parkFeesValue; }
+            set { _parkFeesValue = value; }
+        }
+
 
     }
 }

@@ -164,7 +164,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Area Number" Width="150"  Binding="{Binding Path=AreaNumber}" />
                 <DataGridTextColumn Header="Area Hall" Width="130"  Binding="{Binding Path=Kategori}"  />
-                <DataGridTextColumn Header="Salaray per hour" Width="200" Binding="{Binding Path=FessValue}"  />
+                <DataGridTextColumn Header="Salaray per hour" Width="200" Binding="{Binding Path=ParkFeesValue}"  />
                 <DataGridTextColumn Header="Created at" Width="auto" Binding="{Binding Path=CreatedAt}"  />
                 <DataGridTemplateColumn Width="100" >
                     <DataGridTemplateColumn.CellTemplate>

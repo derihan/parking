@@ -79,7 +79,7 @@ namespace WpfApp1.ViewModel.Area
         {            
             if (String.IsNullOrEmpty(CurrentArea.AreaNumber.ToString())
                 || String.IsNullOrEmpty(CurrentArea.KategoriId.ToString())
-                || String.IsNullOrEmpty(CurrentArea.FessId.ToString())
+                || String.IsNullOrEmpty(CurrentArea.ParkFeesId.ToString())
                 )
             {
                 Coloring = new SolidColorBrush(Color.FromRgb(231, 76, 60));

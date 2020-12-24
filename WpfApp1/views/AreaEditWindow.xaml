@@ -83,31 +83,24 @@
         
         <TextBox Grid.Row="2" 
                  Style="{StaticResource tcenter}" 
-                 Text="{Binding Path=AreaSelceted.AreaId, Mode=TwoWay}" 
+                 Text="{Binding Path=AreaSelceted.AreaNumber, Mode=TwoWay}" 
                  x:Name="txtNum"
                  Grid.Column="2" />
         <ComboBox Grid.Row="4" 
                   ItemsSource="{Binding Source={StaticResource vm_area}, Path=Kategoris, Mode=OneWay}" 
-                  DisplayMemberPath="KategoriHall"
-                  SelectedValuePath="KategoriId"
-                  
-                  SelectedItem="{Binding Path=AreaSelceted.KategoriId ,Mode=TwoWay }"
-                  SelectedValue="{Binding Path=AreaSelceted.Kategori}"
                   Style="{StaticResource cbcenter}" 
                   Grid.Column="2" 
                   Name="cbKat"
                   />
         <ComboBox Grid.Row="6" 
                   Style="{StaticResource cbcenter}" 
-                  DisplayMemberPath="FeesValue"
-                  SelectedValuePath="ParkFeesId"
-                 
-                  ItemsSource="{Binding Source={StaticResource vm_area}, Path=FeesModels, Mode=OneWay}"
-                  SelectedItem="{Binding Path=AreaSelceted.FessId,Mode=TwoWay}"
-                  SelectedValue="{Binding Path=AreaSelceted.FessId}"
-                  Grid.Column="2" />
-
-
+                  ItemsSource="{Binding Source={StaticResource vm_area},Path=CollectionFees, Mode=OneWay}"
+                  IsSynchronizedWithCurrentItem="True"
+                  DisplayMemberPath="ParkFeesValue" 
+                  SelectedValuePath="" 
+                  Grid.Column="2" 
+                  SelectedItem="{Binding Path=AreaSelceted.ParkFeesId}"/>
+    
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="3" Grid.Column="2"  />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="5" Grid.Column="2" />
         <Label  Content="" Style="{StaticResource cntAlert }" Grid.Row="7" Grid.Column="2" />
