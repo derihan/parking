@@ -214,6 +214,9 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -341,15 +344,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="converters\BitmapToSOurce.cs" />
     <Compile Include="converters\BooleanToVisibilityConverter .cs" />
     <Compile Include="converters\ComboboxConverter.cs" />
+    <Compile Include="helper\CreateRandomPassword.cs" />
     <Compile Include="customcontrols\TextBocControlls.xaml.cs">
       <DependentUpon>TextBocControlls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="helper\GenerateQRcode.cs" />
     <Compile Include="Interface\IClosable.cs" />
     <Compile Include="Models\AreaModels.cs" />
     <Compile Include="Models\FeesModel.cs" />
     <Compile Include="Models\KategoriModels.cs" />
+    <Compile Include="Models\ScannerModel.cs" />
     <Compile Include="Models\SelectedFeesModel.cs" />
     <Compile Include="Models\UserModels.cs" />
     <Compile Include="Services\AreaServices.cs" />
@@ -358,11 +365,13 @@
     <Compile Include="Services\GetToken.cs" />
     <Compile Include="Services\KategoriServices.cs" />
     <Compile Include="Services\MainServices.cs" />
+    <Compile Include="Services\ScannerServices.cs" />
     <Compile Include="ViewModel\Area\AddAreaViewModels.cs" />
     <Compile Include="ViewModel\Area\AreavIewModels.cs" />
     <Compile Include="ViewModel\Area\EditAreaViewModels.cs" />
     <Compile Include="ViewModel\AuthViewModels.cs" />
-    <Compile Include="ViewModel\ScannerViewModel.cs" />
+    <Compile Include="ViewModel\Scanner\GenerateViewModel.cs" />
+    <Compile Include="ViewModel\Scanner\ScannerViewModel.cs" />
     <Compile Include="views\AreaEditWindow.xaml.cs">
       <DependentUpon>AreaEditWindow.xaml</DependentUpon>
     </Compile>

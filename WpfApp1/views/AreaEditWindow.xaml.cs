@@ -28,7 +28,6 @@ namespace WpfApp1.views
             InitializeComponent();
             EditAreaViewModels = new EditAreaViewModels(selecteditem);
             DataContext = EditAreaViewModels;
-            
         }
 
         public void Dispose()

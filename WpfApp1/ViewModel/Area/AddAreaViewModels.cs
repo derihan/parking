@@ -42,7 +42,6 @@ namespace WpfApp1.ViewModel.Area
             set { visibility = value; OnPropertyChanged("Visibility"); }
         }
         #endregion
-
         public AreaModel CurrentArea
         {
             get { return area; }
@@ -54,10 +53,8 @@ namespace WpfApp1.ViewModel.Area
             CurrentArea = areas;
         }
 
-      
-
+     
         private ICommand saveareaCommand;
-
         public ICommand SaveAreaCommand
         {
             get
