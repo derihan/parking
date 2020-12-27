@@ -31,9 +31,8 @@ namespace WpfApp1.ViewModel.Area
         public AreavIewModels()
         {
             getdata();
-          
+            LoadFees();
             LoadKategori();
-            collectionFees();
         }
         #endregion
 
@@ -79,7 +78,6 @@ namespace WpfApp1.ViewModel.Area
             set { areasData = value; OnPropertyChanged("AreaData"); }
         }
 
-    
         private void getdata()
         {
             AreaData = new ObservableCollection<AreaModel>(_services.GetAll());
@@ -104,11 +102,12 @@ namespace WpfApp1.ViewModel.Area
         AreaEditWindow EditWindow;
         private void Edit()
         {
-         
-          
+
+           
             if (EditWindow == null)
             {
-
+                LoadFees();
+                LoadKategori();
                 EditWindow = new AreaEditWindow(SelectArea);
                 EditWindow.EditAreaViewModels.AreaEdit += EditAreaViewModelSaved;
                 EditWindow.Closing += EditAreaWindowClosing;
@@ -197,6 +196,7 @@ namespace WpfApp1.ViewModel.Area
         public void LoadFees()
         {
             FeesModels = new List<FeesModel>(_feeservices.GetFees());
+           
         }
 
         private SelectedFeesModel _selectedFees;
@@ -211,20 +211,7 @@ namespace WpfApp1.ViewModel.Area
 
         }
 
-        public ObservableCollection<SelectedFeesModel> CollectionFees { get; set; }
-        public void collectionFees()
-        {
-                LoadFees();
-                var itemid = FeesModels;
-                CollectionFees = new ObservableCollection<SelectedFeesModel>();
-                foreach (var item in itemid)
-                {
-                    CollectionFees.Add(new SelectedFeesModel { ParkFeesId = item.ParkFeesId, ParkFeesValue = item.FeesValue });
-                }
-          
-           
-        }
-
+    
        
         private IEnumerable<KategoriModels> kategoris;
         public IEnumerable<KategoriModels> Kategoris

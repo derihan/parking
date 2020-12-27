@@ -15,33 +15,32 @@ using System.Windows.Shapes;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using Emgu.CV.UI;
+using WpfApp1.ViewModel.Scanner;
+using WpfApp1.Interface;
+using WpfApp1.Models;
 
 namespace WpfApp1.views
 {
     /// <summary>
     /// Interaction logic for ScannerPage.xaml
     /// </summary>
-    public partial class ScannerPage : Window
+    public partial class ScannerPage : Window, IClosable
     {
-        public ScannerPage()
+       public GenerateViewModel generateViewModel;
+        public ScannerPage(ScannerModel scanmodel)
         {
             InitializeComponent();
+            generateViewModel = new GenerateViewModel(scanmodel);
+            DataContext = generateViewModel;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+     
+
+        public void Dispose()
         {
-            System.Windows.Forms.Integration.WindowsFormsHost host =
-            new System.Windows.Forms.Integration.WindowsFormsHost();
-
-            // Create the MaskedTextBox control.
-            MaskedTextBox mtbDate = new MaskedTextBox("00/00/0000");
-
-            // Assign the MaskedTextBox control as the host control's child.
-            host.Child = mtbDate;
-
-            // Add the interop host control to the Grid
-            // control's collection of child controls.
-            this.gridMain.Children.Add(host);
+            generateViewModel = null;
+            GC.SuppressFinalize(this);
+            GC.Collect();
         }
     }
 }

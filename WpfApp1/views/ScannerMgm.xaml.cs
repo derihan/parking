@@ -7,10 +7,7 @@ using System.Windows.Input;
 using Emgu.CV;
 using Emgu.CV.Structure;
 
-using RestSharp;
-using RestSharp.Serialization.Json;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 
 
 using IronOcr;
@@ -23,6 +20,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Text;
+using WpfApp1.ViewModel.Scanner;
+using Newtonsoft.Json;
 
 namespace WpfApp1.views
 {
@@ -35,174 +34,108 @@ namespace WpfApp1.views
         Image<Bgr, byte> imgInput;
         Image<Gray, byte> binaris;
         private string filedirs;
-      
+        ScannerViewModel sacnnervm;
 
 
         public ScannerMgm()
         {
             InitializeComponent();
-           
+            sacnnervm = new ScannerViewModel();
+            DataContext = sacnnervm;
         }
 
         private void GridopenScann_window(object sender, MouseButtonEventArgs e)
         {
-            ScannerPage scPage = new ScannerPage();
            
-            scPage.Show();
         }
 
 
         private void pictureBox1_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            OpenFileDialog opf = new OpenFileDialog();
-            if (opf.ShowDialog() == DialogResult.OK)
-            {
-                imgInput = new Image<Bgr, byte>(opf.FileName);
-                pictureBox1.Image = imgInput.ToBitmap();
-            }
+            //OpenFileDialog opf = new OpenFileDialog();
+            //if (opf.ShowDialog() == DialogResult.OK)
+            //{
+            //    imgInput = new Image<Bgr, byte>(opf.FileName);
+            //    pictureBox1.Image = imgInput.ToBitmap();
+            //}
             
-            callApi(opf);
+            //callApi(opf);
          
         }
 
-        private void callApi(OpenFileDialog opf)
-        {
-            if (imgInput == null)
-            {
-                MessageBox.Show("File imgae wajib di isi");
-                return;
-            }
-            else
-            {
-                filedirs = opf.FileName;
-                if (String.IsNullOrEmpty(filedirs))
-                {
-                    return;
-                }
-                var client = new RestClient("http://localhost:8000/ocr-service/");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "multipart/form-data");
-                request.AddHeader("Accept", "application/json");
-                request.AddHeader("Connection", "Keep-Alive");
-                request.AddFile("filed", filedirs);
-                IRestResponse response = client.Execute(request);
+     
 
-                if (response.IsSuccessful)
-                {
-                   
-                    var deserialize = new JsonDeserializer();
-                    var output = deserialize.Deserialize<Dictionary<String, string>>(response);
-                    var result = output["base64_data"];
-                    Base64toImage(result);
-                    plate_recognize();
-                }
-                else
-                {
-                    Console.WriteLine("server error");
-                }
-            }
-
-        }
-
-        public System.Drawing.Image Base64toImage(string base64String)
-        {
-            byte[] imageByte = Convert.FromBase64String(base64String);
-
-            using (MemoryStream ms = new MemoryStream(imageByte, 0, imageByte.Length))
-            {
-                System.Drawing.Image image = System.Drawing.Image.FromStream(ms, true);
-                //return image;
-                pictureBox2.Width = image.Width;
-                pictureBox2.Height = image.Height;
-                pictureBox2.Image = image;
-                return image;
-            }
-        }
-
-        public byte[] ConvertBitMapToByteArray(Bitmap bitmap)
-        {
-            byte[] result = null;
-
-            if (bitmap != null)
-            {
-                MemoryStream stream = new MemoryStream();
-                bitmap.Save(stream, bitmap.RawFormat);
-                result = stream.ToArray();
-            }
-
-            return result;
-        }
+      
         
         public void plate_recognize()
         {
           
-            Bitmap mastImg = new Bitmap(pictureBox2.Image);
-            Image<Bgr, byte> imgBit = mastImg.ToImage<Bgr, byte>();
+            //Bitmap mastImg = new Bitmap(pictureBox2.Image);
+            //Image<Bgr, byte> imgBit = mastImg.ToImage<Bgr, byte>();
             
 
 
-            Mat hsv = new Mat();
+            //Mat hsv = new Mat();
 
-            CvInvoke.CvtColor(imgBit, hsv, Emgu.CV.CvEnum.ColorConversion.Bgr2Hsv);
-            Mat[] channels = hsv.Split();
+            //CvInvoke.CvtColor(imgBit, hsv, Emgu.CV.CvEnum.ColorConversion.Bgr2Hsv);
+            //Mat[] channels = hsv.Split();
               
-            RangeF H = channels[0].GetValueRange();
-            RangeF S = channels[1].GetValueRange();
-            RangeF V = channels[2].GetValueRange();
+            //RangeF H = channels[0].GetValueRange();
+            //RangeF S = channels[1].GetValueRange();
+            //RangeF V = channels[2].GetValueRange();
 
-            Console.WriteLine(string.Format("Max S {0} Min S {1}", S.Max, S.Min));
-            Console.WriteLine(string.Format("Max V {0} Min V {1}", V.Max, V.Min));
-            Console.WriteLine(string.Format("Max H {0} Min H {1}", H.Max, H.Min));
+            //Console.WriteLine(string.Format("Max S {0} Min S {1}", S.Max, S.Min));
+            //Console.WriteLine(string.Format("Max V {0} Min V {1}", V.Max, V.Min));
+            //Console.WriteLine(string.Format("Max H {0} Min H {1}", H.Max, H.Min));
            
 
-            MCvScalar mean = CvInvoke.Mean(hsv);
+            //MCvScalar mean = CvInvoke.Mean(hsv);
 
-            Console.WriteLine(string.Format("Mean V {0} Mean S {1} Mean V {2} ", mean.V0, mean.V1, mean.V2)); ;
-            var chanel1 = channels[1].Rows;
+            //Console.WriteLine(string.Format("Mean V {0} Mean S {1} Mean V {2} ", mean.V0, mean.V1, mean.V2)); ;
+            //var chanel1 = channels[1].Rows;
 
-            binaris = channels[1].ToImage<Gray, byte>();
+            //binaris = channels[1].ToImage<Gray, byte>();
 
-            if (V.Max > 200 && S.Max > 200 && H.Max > 150 && V.Min < 50 && S.Min < 50 && H.Min < 100 )
-            {
+            //if (V.Max > 200 && S.Max > 200 && H.Max > 150 && V.Min < 50 && S.Min < 50 && H.Min < 100 )
+            //{
               
              
-                binaris._ThresholdBinaryInv(new Gray(153), new Gray(255));
-                binaris._SmoothGaussian(5);
-                binaris._ThresholdBinary(new Gray(164), new Gray(255));
-            }
-            else if (V.Max < 198 && S.Max < 200 && H.Max < 200 )
-            {
+            //    binaris._ThresholdBinaryInv(new Gray(153), new Gray(255));
+            //    binaris._SmoothGaussian(5);
+            //    binaris._ThresholdBinary(new Gray(164), new Gray(255));
+            //}
+            //else if (V.Max < 198 && S.Max < 200 && H.Max < 200 )
+            //{
               
 
-                binaris._ThresholdBinary(new Gray(20), new Gray(255));
+            //    binaris._ThresholdBinary(new Gray(20), new Gray(255));
 
 
-                //imgae background
-                //imgGray = channels[0].ToImage<Gray, byte>();
-                //imgGray._SmoothGaussian(3);
-                //imgGray._ThresholdBinary(new Gray(10), new Gray(255));
+            //    //imgae background
+            //    //imgGray = channels[0].ToImage<Gray, byte>();
+            //    //imgGray._SmoothGaussian(3);
+            //    //imgGray._ThresholdBinary(new Gray(10), new Gray(255));
 
-                //thresholdvalue = 120;
-                //binaris = imgBit.Convert<Gray, byte>().ThresholdBinaryInv(new Gray(thresholdvalue), new Gray(255));
-            }
-            else
-            {
+            //    //thresholdvalue = 120;
+            //    //binaris = imgBit.Convert<Gray, byte>().ThresholdBinaryInv(new Gray(thresholdvalue), new Gray(255));
+            //}
+            //else
+            //{
                
-                binaris._ThresholdBinary(new Gray(40), new Gray(255));
-            }
+            //    binaris._ThresholdBinary(new Gray(40), new Gray(255));
+            //}
 
 
-            var Ocr = new IronTesseract();
-            using (var Input = new OcrInput(binaris.ToBitmap()))
-            {
-                //Input.Deskew();
-                 // only use if accuracy <97%
-                var Result = Ocr.Read(Input);
+            //var Ocr = new IronTesseract();
+            //using (var Input = new OcrInput(binaris.ToBitmap()))
+            //{
+            //    //Input.Deskew();
+            //     // only use if accuracy <97%
+            //    var Result = Ocr.Read(Input);
               
-            }
+            //}
 
-            CvInvoke.Imshow("S 3", binaris);
+            //CvInvoke.Imshow("S 3", binaris);
             
                     
         }
@@ -240,10 +173,10 @@ namespace WpfApp1.views
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            var plain = Encoding.UTF8.GetBytes(Convert.ToString(GenerateNewRandom()) + Convert.ToString(licenseP.Text));
-            var qrcode = licenseP.Text;
-            var username = "Parker#" + GenerateNewRandom();
-            var password = Convert.ToBase64String(plain);
+            //var plain = Encoding.UTF8.GetBytes(Convert.ToString(GenerateNewRandom()) + Convert.ToString(licenseP.Text));
+            //var qrcode = licenseP.Text;
+            //var username = "Parker#" + GenerateNewRandom();
+            //var password = Convert.ToBase64String(plain);
 
            
         }

@@ -4,32 +4,65 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
-        xmlns:local="clr-namespace:WpfApp1.views"
+        xmlns:local="clr-namespace:WpfApp1.views" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        MinWidth="800"
-        Title="ScannerPage" Height="450" Width="800">
+        MinWidth="400"
+        Title="ScannerPage" Height="350" Width="510"  >
     <Grid Margin="10" x:Name="gridMain" >
-
-      
-
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0">
-            <WindowsFormsHost>
-                <wf:PictureBox x:Name="pictureBox2" Width="400" Height="400" SizeMode="StretchImage"  />
-            </WindowsFormsHost>
+        <Grid Grid.Column="0" >
+            <Image Source="{Binding ImageSource.ImageSource, Mode=OneWay}" />
         </Grid>
-        
-        <Grid Grid.Column="1">
+
+        <Grid Grid.Column="1" Background="White" >
             <Grid.RowDefinitions>
-                <RowDefinition Height="150" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="20" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Label Content="parking spot number" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="16" Grid.Row="0"/>
-            <Label Content="B4 - 01 " HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="46" Grid.Row="1"/>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" Orientation="Horizontal" >
+                <Label Content="Kode Parkir " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
+                <Label Content="0007987567 " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
+            </StackPanel>
+            <StackPanel  Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" >
+                <Label Content="Harga/  jam " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
+                <Label Content="12.000 " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
+            </StackPanel>
+            <StackPanel Grid.Row="2"  >
+                <Label Content="Nomor tempat " HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Basement 1 - 09" FontSize="23" />
+            </StackPanel>
+            <TextBlock
+                    Grid.Row="4"
+                    VerticalAlignment="Center"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    >
+                    <iconPacks:PackIconFontAwesome x:Name="cikon" Kind="InfoCircleSolid" Height="11" />
+                    <Run Text="Catatan" FontSize="14" />
+            </TextBlock>
+            <StackPanel Grid.Row="5" Grid.Column="1" >
+                <Label  Content="* Belum ada catatan" FontSize="11" />
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" >
+                <TextBlock  Height="25" Width="70" Background="#0984e3" Foreground="White"  >
+                    <Label Content="Lanjut" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Width="68" Foreground="White" />
+                </TextBlock>
+                <Border BorderBrush="Gray" BorderThickness="1" Height="25" >
+                    <TextBlock  Height="25" Width="70" Background="White"   >
+                    <Label Content="Cetak" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Width="68" Foreground="#0984e3"/>
+                    </TextBlock>
+                </Border>
+               
+
+            </StackPanel>
         </Grid>
     </Grid>
 </Window>

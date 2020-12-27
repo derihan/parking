@@ -8,63 +8,61 @@
       xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.BootstrapIcons"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="1000"
+      MinWidth="950"
       Title="ScannerMgm">
 
     <Grid Margin="10" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Margin="0" HorizontalAlignment="Left" Width="780" >
+        <Grid Margin="10" Grid.Column="0" Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="57"/>
+                <RowDefinition Height="300" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="178" />
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="440" />
+                <ColumnDefinition Width="30" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Cursor="Hand" MouseLeftButtonDown="GridopenScann_window"  >
-                <Border BorderBrush="Gray" BorderThickness="0.3" Margin="0,0,10.4,10.4"  >
-                    <Grid VerticalAlignment="Center"  >
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid  Grid.Column="0" Background="#0984e3" Height="36" VerticalAlignment="Top" >
-                            <iconPacks:PackIconBootstrapIcons Kind="UpcScan" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" />
-                        </Grid>
-                        <Grid  Grid.Column="1" Background="White" Height="36" >
-                            <Label Content="Show scanner window" VerticalAlignment="Center" />
-                        </Grid>
-                    </Grid>
-                </Border>
-            </Grid>
-        </Grid>
-        <Grid Grid.Row="1" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" >
-                <WindowsFormsHost Width="450" Height="400" HorizontalAlignment="Left"  >
-                    <wf:PictureBox x:Name="pictureBox1" SizeMode="StretchImage" BackColor="WhiteSmoke"  MouseDown="pictureBox1_MouseDown" />
-                </WindowsFormsHost>
-            </Grid>
-            <Grid Grid.Row="0" Grid.Column="1" >
-                <WindowsFormsHost Width="236" Height="74" HorizontalAlignment="Left" VerticalAlignment="Top"  >
-                    <wf:PictureBox x:Name="pictureBox2" SizeMode="AutoSize" BackColor="WhiteSmoke"  MouseDoubleClick="pictclicked" />
-                </WindowsFormsHost>
-                <WindowsFormsHost Width="223" Height="74" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="257,0,0,0"  >
-                    <wf:PictureBox x:Name="pictureBox3" SizeMode="AutoSize" BackColor="WhiteSmoke"  MouseDoubleClick="pictclicked" />
-                </WindowsFormsHost>
-                <TextBox x:Name="licenseP" HorizontalAlignment="Left" Height="23" Margin="0,117,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="178"/>
-                <Label Content="Input license plate number" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top"/>
-                <Button Content="Generate Qr code" Click="Button_Click" HorizontalAlignment="Left" Margin="0,152,0,0" VerticalAlignment="Top" Width="178" Height="23"/>
-            </Grid>
+            <Border BorderThickness="1" BorderBrush="#FF000000" Grid.Column="1" Grid.Row="0" Width="300" HorizontalAlignment="Left" >
+                <Image Width="300" />
+            </Border>
+           
+            <StackPanel  Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                <StackPanel HorizontalAlignment="Stretch" Width="200" >
+                    <Label Content="Posible plate" Height="30" FontSize="14" />
+                    <Border BorderThickness="1" BorderBrush="#FF000000" >
+                        <Image Height="50" />
+                    </Border>
+                   
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Stretch" Width="180" Margin="20,0,0,0" >
+                    <Label FontSize="14" HorizontalAlignment="Left">
+                        <TextBlock TextDecorations="Underline">License Number</TextBlock>
+                    </Label>
+                    <Label Content="ABC 80009 YH" FontSize="30" VerticalContentAlignment="Center" />
+                </StackPanel>
+            </StackPanel>
+            <Grid Grid.Row="2" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"  Content="Masukan plat nomor :" FontSize="16" />
+                <StackPanel Orientation="Horizontal" Grid.Row="1" >
 
+                    <TextBox Width="250" VerticalContentAlignment="Center" Height="25" Text="{Binding License, Mode=TwoWay}" />
+                    <Button Content="Generate" Width="100" Height="25" FontSize="14" Command="{Binding GenerateCommand}" />
+                </StackPanel>
+            </Grid>
         </Grid>
+       
     </Grid>
 </Page>
