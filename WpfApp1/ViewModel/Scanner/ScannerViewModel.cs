@@ -19,12 +19,15 @@ using System.IO;
 using System.Windows.Media.Imaging;
 using WpfApp1.views;
 using WpfApp1.helper;
+using System.Windows.Forms;
+using WpfApp1.converters;
 
 namespace WpfApp1.ViewModel.Scanner
 {
     public class ScannerViewModel : INotifyPropertyChanged
     {
         ScannerServices scannerServices = new ScannerServices();
+        BitmapToSOurce tsc = new BitmapToSOurce();
         private GenerateQRcode generatecodeQr;
         public ScannerViewModel()
         {
@@ -35,7 +38,7 @@ namespace WpfApp1.ViewModel.Scanner
         public string License
         {
             get { return license; }
-            set { license = value;  OnPropertyChanged("License"); }
+            set { license = value; OnPropertyChanged("License"); }
         }
 
         private ScannerModel images;
@@ -56,27 +59,94 @@ namespace WpfApp1.ViewModel.Scanner
             }
         }
 
-      
+        #region upload image
+
+        private ImageSource _sourceres;
+
+        public ImageSource Sourceres
+        {
+            get { return _sourceres; }
+            set { _sourceres = value; OnPropertyChanged("Sourceres"); }
+        }
+
+        private ICommand getImage;
+        public ICommand GetImage
+        {
+            get
+            {
+                if (getImage == null)
+                    getImage = new RelayCommand(getImageLicense);
+                return getImage;
+            }
+        }
+
+        public void getImageLicense()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                var imagerImageCar = new Bitmap(dlg.FileName);
+                Sourceres = tsc.BitmapToImSource(imagerImageCar);
+            }
+        }
+
+        #endregion upload image
+
+        private string _message;
+
+        public string Messages
+        {
+            get { return _message; }
+            set { _message = value; }
+        }
+
+        private string _source;
+
+        public string Source
+        {
+            get { return _source; }
+            set { _source = value; }
+        }
+
 
         ScannerPage scanerwindow;
 
+        public void resetForm(ScannerModel scannerModel)
+        {
+            scanerwindow.Close();
+            scanerwindow = new ScannerPage(Images);
+            scanerwindow.Show();
+        }
+
         public void generateQr()
         {
-            
-            Images = new ScannerModel { ImageSource = generatecodeQr.makeQrCode("asdhjbadbiwuyaqdniuiubguiwsebfiuweg") };
-
-
-            if (scanerwindow == null)
+            if (Source != null || License != null )
             {
-                scanerwindow = new ScannerPage(Images);
-                scanerwindow.generateViewModel.scaneropen += ScannerOpen;
-                scanerwindow.Show();
+                var dataqu =  scannerServices.reqQrCode(License);
+                Images = new ScannerModel {
+                    ImageSource = generatecodeQr.makeQrCode(dataqu["kode_parkir"]),
+                    License_number = License,
+                    AreaKatName = dataqu["areaKatName"],
+                    Areanumber = Convert.ToInt32(dataqu["areaNumber"]),
+                    FeesValue = Convert.ToInt32(dataqu["fees"]),
+                    Kodeparkir = dataqu["kode_parkir"]                
+                };
+                
+                if (scanerwindow == null)
+                {
+                    scanerwindow = new ScannerPage(Images);
+                    scanerwindow.Show();
+                }
+                else
+                {
+                    resetForm(Images);
+                }
             }
             else
             {
-                scanerwindow.Focus();
+                Messages = "License manual wajib di isi";
             }
-
+            
             //Console.WriteLine(License);
             //scannerServices.reqQrCode(License);
         }

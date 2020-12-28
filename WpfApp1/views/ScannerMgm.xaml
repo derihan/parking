@@ -31,10 +31,13 @@
                 <ColumnDefinition Width="440" />
                 <ColumnDefinition Width="30" />
             </Grid.ColumnDefinitions>
-            <Border BorderThickness="1" BorderBrush="#FF000000" Grid.Column="1" Grid.Row="0" Width="300" HorizontalAlignment="Left" >
-                <Image Width="300" />
-            </Border>
-           
+            <Grid Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" >
+                <Border BorderThickness="1" BorderBrush="#FF000000" Width="300" HorizontalAlignment="Left" >
+                    <Image Width="300" Source="{Binding Sourceres, Mode=TwoWay}" Stretch="Fill" />
+                </Border>
+                <Button Content="Upload image" Height="30" Width="100" VerticalAlignment="Bottom" Command="{Binding GetImage}" Margin="0,0,0,20" />
+            </Grid>
+            
             <StackPanel  Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Stretch" >
                 <StackPanel HorizontalAlignment="Stretch" Width="200" >
                     <Label Content="Posible plate" Height="30" FontSize="14" />

@@ -24,6 +24,39 @@ namespace WpfApp1.Models
             set { imageSource = value; }
         }
 
+        private int feevalue;
+
+        public int FeesValue
+        {
+            get { return feevalue; }
+            set { feevalue = value; }
+        }
+
+        private int areaNumber;
+
+        public int Areanumber
+        {
+            get { return areaNumber; }
+            set { areaNumber = value; }
+        }
+
+        private string kodep;
+
+        public string Kodeparkir
+        {
+            get { return kodep; }
+            set { kodep = value; }
+        }
+
+
+        private string areaKatName;
+
+        public string AreaKatName
+        {
+            get { return areaKatName; }
+            set { areaKatName = value; }
+        }
+
 
     }
 }

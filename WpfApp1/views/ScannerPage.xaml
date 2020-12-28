@@ -5,20 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         xmlns:local="clr-namespace:WpfApp1.views" xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:scvm="clr-namespace:WpfApp1.ViewModel.Scanner"
         mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
         MinWidth="400"
-        Title="ScannerPage" Height="350" Width="510"  >
+        Name="modscan"
+        MinHeight="360"
+        Title="ScannerPage" Height="350" Width="810"  >
+    <Window.Resources>
+        <scvm:ScannerViewModel x:Key="scvm" />
+    </Window.Resources>
     <Grid Margin="10" x:Name="gridMain" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="300" />
             <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
-
         <Grid Grid.Column="0" >
-            <Image Source="{Binding ImageSource.ImageSource, Mode=OneWay}" />
+            <Image Source="{Binding Source={StaticResource scvm}, Path=Orignalimage, Mode=OneWay}" />
+        </Grid>
+        <Grid Grid.Column="1" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300"  />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="{Binding ImageSource.ImageSource, Mode=OneWay}" />
         </Grid>
 
-        <Grid Grid.Column="1" Background="White" >
+        <Grid Grid.Column="2" Background="White" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="30" />
                 <RowDefinition Height="30" />
@@ -29,15 +45,19 @@
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Stretch" Orientation="Horizontal" >
                 <Label Content="Kode Parkir " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
-                <Label Content="0007987567 " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
+                <Label Content="{Binding ImageSource.Kodeparkir, Mode=OneWay}" FontSize="12" HorizontalAlignment="Stretch" Height="30" />
             </StackPanel>
             <StackPanel  Grid.Row="1" HorizontalAlignment="Stretch" Orientation="Horizontal" >
                 <Label Content="Harga/  jam " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
-                <Label Content="12.000 " FontSize="12" HorizontalAlignment="Stretch" Height="30" />
+                <Label Content="{Binding ImageSource.FeesValue, Mode=OneWay}" FontSize="12" HorizontalAlignment="Stretch" Height="30" />
             </StackPanel>
             <StackPanel Grid.Row="2"  >
                 <Label Content="Nomor tempat " HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                <Label Content="Basement 1 - 09" FontSize="23" />
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Label Content="{Binding ImageSource.AreaKatName, Mode=OneWay}" FontSize="23" HorizontalAlignment="Center" />
+                    <Label Content="{Binding ImageSource.Areanumber, Mode=OneWay}" FontSize="23"  HorizontalAlignment="Center"/>
+                </StackPanel>
+               
             </StackPanel>
             <TextBlock
                     Grid.Row="4"
@@ -52,11 +72,14 @@
                 <Label  Content="* Belum ada catatan" FontSize="11" />
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" >
-                <TextBlock  Height="25" Width="70" Background="#0984e3" Foreground="White"  >
-                    <Label Content="Lanjut" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Width="68" Foreground="White" />
+                <TextBlock Cursor="Hand"  Height="25" Width="70" Background="#0984e3" Foreground="White"  >
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding ClosedScanCommand}"  MouseAction="LeftClick"  />
+                    </TextBlock.InputBindings>
+                    <Label Content="Close" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Width="68" Foreground="White" />
                 </TextBlock>
                 <Border BorderBrush="Gray" BorderThickness="1" Height="25" >
-                    <TextBlock  Height="25" Width="70" Background="White"   >
+                    <TextBlock Cursor="Hand"  Height="25" Width="70" Background="White"   >
                     <Label Content="Cetak" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Width="68" Foreground="#0984e3"/>
                     </TextBlock>
                 </Border>

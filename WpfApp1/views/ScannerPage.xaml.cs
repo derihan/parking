@@ -34,8 +34,6 @@ namespace WpfApp1.views
             DataContext = generateViewModel;
         }
 
-     
-
         public void Dispose()
         {
             generateViewModel = null;

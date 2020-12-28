@@ -347,6 +347,7 @@
     <Compile Include="converters\BitmapToSOurce.cs" />
     <Compile Include="converters\BooleanToVisibilityConverter .cs" />
     <Compile Include="converters\ComboboxConverter.cs" />
+    <Compile Include="helper\BaseConverter.cs" />
     <Compile Include="helper\CreateRandomPassword.cs" />
     <Compile Include="customcontrols\TextBocControlls.xaml.cs">
       <DependentUpon>TextBocControlls.xaml</DependentUpon>

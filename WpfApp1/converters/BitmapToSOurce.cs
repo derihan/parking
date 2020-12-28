@@ -13,8 +13,6 @@ namespace WpfApp1.converters
     public class BitmapToSOurce
     {
 
-    
-
         public BitmapToSOurce()
         {
 
