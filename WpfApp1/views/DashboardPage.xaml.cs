@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.views;
 
 namespace WpfApp1.views
 {
@@ -20,10 +21,12 @@ namespace WpfApp1.views
     /// </summary>
     public partial class DashboardPage : Page
     {
+        ScannerPage scanner;
         public DashboardPage()
         {
             InitializeComponent();
             navigatedPage("/views/HomePage.xaml");
+            scanner = new ScannerPage(null);
         }
 
         private void navigatedPage(string urif)
@@ -39,6 +42,7 @@ namespace WpfApp1.views
         private void TextBlock_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
         {
              navigatedPage("/views/ScannerMgm.xaml");
+             
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -22,10 +22,9 @@ namespace WpfApp1.Services
       
         public Dictionary<string, string> reqQrCode(string scanner)
         {
-           
-
+          
             var password = pwd.randomPassword();
-            var username =  String.Format("Guest#{0}", scanner);
+            var username =  String.Format("user_{0}", pwd.RandomUsername());
             var license = scanner;
 
             var client = new RestClient("http://localhost:5000/api/auth/generate");
@@ -42,12 +41,20 @@ namespace WpfApp1.Services
             });
 
             var response = client.Post(request);
-            Console.WriteLine(response.Content);
+           
             var oke = response.StatusCode.ToString();
             if (oke == "Created")
             {
                 JObject o = JObject.Parse(response.Content);
-                return new Dictionary<string, string>();
+                Console.WriteLine(o["data"]);
+
+                var datadict = new Dictionary<string, string>();
+                datadict.Add("kode_parkir", (string)o["kode"]);
+                datadict.Add("fees", (string)o["data"]["feesValue"]);
+                datadict.Add("areaNumber", (string)o["data"]["areaNumber"]);
+                datadict.Add("areaKatName", (string)o["data"]["areaKatName"]);
+
+                return datadict;
             }
             else
             {

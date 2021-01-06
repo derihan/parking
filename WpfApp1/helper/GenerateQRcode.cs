@@ -24,7 +24,7 @@ namespace WpfApp1.helper
             QRCodeGenerator qrcodegenerator = new QRCodeGenerator();
             QRCodeData codeData = qrcodegenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
             QRCode qrcode = new QRCode(codeData);
-            Bitmap qrcodeIamage = qrcode.GetGraphic(200);
+            Bitmap qrcodeIamage = qrcode.GetGraphic(20);
             Images = sOurce.BitmapToImSource(qrcodeIamage);
 
             return Images;

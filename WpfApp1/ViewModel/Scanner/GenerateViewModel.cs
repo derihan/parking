@@ -4,8 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media;
+using WpfApp1.Commands;
 using WpfApp1.Models;
+using WpfApp1.views;
 
 namespace WpfApp1.ViewModel.Scanner
 {
@@ -18,6 +21,24 @@ namespace WpfApp1.ViewModel.Scanner
         {
             get { return _imSource; }
             set { _imSource = value; OnPropertyChanged("ImageSource"); }
+        }
+
+        private ICommand closedwin;
+
+        public ICommand ClosedScanCommand
+        {
+            get
+            {
+                if (closedwin == null)
+                    closedwin = new RelayCommand(closedWin);
+                return closedwin;
+            }
+        }
+        ScannerPage winscan;
+
+        public void closedWin()
+        {
+            winscan.Close();
         }
 
 
