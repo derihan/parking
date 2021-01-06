@@ -30,7 +30,8 @@ namespace WpfApp1.views
         public ScannerPage(ScannerModel scanmodel)
         {
             InitializeComponent();
-            generateViewModel = new GenerateViewModel(scanmodel);
+            if(scanmodel != null)
+                generateViewModel = new GenerateViewModel(scanmodel);
             DataContext = generateViewModel;
         }
 

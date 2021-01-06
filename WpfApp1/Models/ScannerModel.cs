@@ -9,6 +9,15 @@ namespace WpfApp1.Models
 {
     public class ScannerModel
     {
+        private ImageSource imageori;
+
+        public ImageSource ImageOri
+        {
+            get { return imageori; }
+            set { imageori = value; }
+        }
+
+
         private string _license;
         public string License_number
         {

@@ -34,35 +34,9 @@ namespace WpfApp1.ViewModel.Scanner
             generatecodeQr = new GenerateQRcode();
         }
 
-        private string license;
-        public string License
-        {
-            get { return license; }
-            set { license = value; OnPropertyChanged("License"); }
-        }
-
-        private ScannerModel images;
-        public ScannerModel Images
-        {
-            get { return images; }
-            set { images = value; OnPropertyChanged("Images"); }
-        }
-
-        private ICommand generateCommand;
-        public ICommand GenerateCommand
-        {
-            get
-            {
-                if (generateCommand == null)
-                    generateCommand = new RelayCommand(generateQr);
-                return generateCommand;
-            }
-        }
 
         #region upload image
-
         private ImageSource _sourceres;
-
         public ImageSource Sourceres
         {
             get { return _sourceres; }
@@ -87,10 +61,44 @@ namespace WpfApp1.ViewModel.Scanner
             {
                 var imagerImageCar = new Bitmap(dlg.FileName);
                 Sourceres = tsc.BitmapToImSource(imagerImageCar);
+
+                if (Sourceres != null)
+                {
+                    License = "ABG9090Y";
+                    generateQr();
+
+                }
             }
+
+
+        }
+        #endregion upload image
+
+        
+        private string license;
+        public string License
+        {
+            get { return license; }
+            set { license = value; OnPropertyChanged("License"); }
         }
 
-        #endregion upload image
+        private ScannerModel images;
+        public ScannerModel Images
+        {
+            get { return images; }
+            set { images = value; OnPropertyChanged("Images"); }
+        }
+
+        private ICommand generateCommand;
+        public ICommand GenerateCommand
+        {
+            get
+            {
+                if (generateCommand == null)
+                    generateCommand = new RelayCommand(generateQr);
+                return generateCommand;
+            }
+        }
 
         private string _message;
 
@@ -129,7 +137,8 @@ namespace WpfApp1.ViewModel.Scanner
                     AreaKatName = dataqu["areaKatName"],
                     Areanumber = Convert.ToInt32(dataqu["areaNumber"]),
                     FeesValue = Convert.ToInt32(dataqu["fees"]),
-                    Kodeparkir = dataqu["kode_parkir"]                
+                    Kodeparkir = dataqu["kode_parkir"],
+                    ImageOri = Sourceres
                 };
                 
                 if (scanerwindow == null)
