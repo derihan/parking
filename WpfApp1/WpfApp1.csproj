@@ -373,37 +373,35 @@
     <Compile Include="ViewModel\AuthViewModels.cs" />
     <Compile Include="ViewModel\Scanner\GenerateViewModel.cs" />
     <Compile Include="ViewModel\Scanner\ScannerViewModel.cs" />
-    <Compile Include="views\AreaEditWindow.xaml.cs">
-      <DependentUpon>AreaEditWindow.xaml</DependentUpon>
+    <Compile Include="views\AreaAddWindow.xaml.cs" />
+    <Compile Include="views\AreaEditWindow.xaml.cs" />
+    <Compile Include="views\AreaModal.xaml.cs">
+      <DependentUpon>AreaModal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="views\AreaAddWindow.xaml.cs">
-      <DependentUpon>AreaAddWindow.xaml</DependentUpon>
+    <Compile Include="views\AreaModalEdit.xaml.cs">
+      <DependentUpon>AreaModalEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="views\AreaViews.xaml.cs">
-      <DependentUpon>AreaViews.xaml</DependentUpon>
+    <Compile Include="views\AreaViews.xaml.cs" />
+    <Compile Include="views\DashboardPage.xaml.cs" />
+    <Compile Include="views\FeesViews.xaml.cs" />
+    <Compile Include="views\HistoryViews.xaml.cs">
+      <DependentUpon>HistoryViews.xaml</DependentUpon>
     </Compile>
-    <Compile Include="views\DashboardPage.xaml.cs">
-      <DependentUpon>DashboardPage.xaml</DependentUpon>
+    <Compile Include="views\HomePage.xaml.cs" />
+    <Compile Include="views\IncomeViews.xaml.cs">
+      <DependentUpon>IncomeViews.xaml</DependentUpon>
     </Compile>
-    <Compile Include="views\FeesViews.xaml.cs">
-      <DependentUpon>FeesViews.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\KategoriView.xaml.cs">
-      <DependentUpon>KategoriView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\ScannerMgm.xaml.cs">
-      <DependentUpon>ScannerMgm.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="views\ScannerPage.xaml.cs">
-      <DependentUpon>ScannerPage.xaml</DependentUpon>
+    <Compile Include="views\KategoriView.xaml.cs" />
+    <Compile Include="views\LoginPage.xaml.cs" />
+    <Compile Include="views\ScannerMgm.xaml.cs" />
+    <Compile Include="views\ScannerPage.xaml.cs" />
+    <Compile Include="views\SlotViews.xaml.cs">
+      <DependentUpon>SlotViews.xaml</DependentUpon>
     </Compile>
     <Compile Include="views\Test.cs" />
+    <Compile Include="views\UserViews.xaml.cs">
+      <DependentUpon>UserViews.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -423,45 +421,29 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="views\AreaEditWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="views\AreaModal.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="views\AreaAddWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="views\AreaModalEdit.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="views\AreaViews.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="views\HistoryViews.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="views\DashboardPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="views\IncomeViews.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="views\FeesViews.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="views\SlotViews.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="views\HomePage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="views\UserViews.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\KategoriView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\LoginPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\ScannerMgm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="views\ScannerPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Window1.xaml">
       <SubType>Designer</SubType>
