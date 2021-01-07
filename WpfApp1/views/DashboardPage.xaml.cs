@@ -59,5 +59,26 @@ namespace WpfApp1.views
         {
             navigatedPage("/views/FeesViews.xaml");
         }
+
+    
+        private void TextBlock_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/HistoryViews.xaml");
+        }
+
+        private void TextBlock_MouseLeftButtonDown_4(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/UserViews.xaml");
+        }
+
+        private void TextBlock_MouseLeftButtonDown_5(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/IncomeViews.xaml");
+        }
+
+        private void TextBlock_MouseLeftButtonDown_6(object sender, MouseButtonEventArgs e)
+        {
+            navigatedPage("/views/SlotViews.xaml");
+        }
     }
 }
